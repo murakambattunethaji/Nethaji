@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getdatafromweb()">get data</button>
+
+
+    <script>
+    function getdatafromweb(){
+        var getdata=new XMLHttpRequest();
+        getdata.onreadystatechange=function(){
+            if (getdata.readyState==4&&getdata.status==200){
+                var receviveddata=JSON.parse(getdata.response)
+                console.log(receviveddata)
+            }
+        }
+        getdata.open("ger","https://jsonplaceholder.typicode.com/users/")
+        getdata.send()
+    }
+    </script>
+</body>
+</html>
