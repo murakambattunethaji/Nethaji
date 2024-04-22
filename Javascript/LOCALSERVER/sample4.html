@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .column {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .registration-form {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .table-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="column">
+        <div class="registration-form">
+            <h2>Registration Form</h2>
+            <form action="#" method="POST">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="button" onclick="registerUser()" id="addUserBtn">Add User</button>
+                <button type="button" onclick="updateUser()" id="updateUserBtn">Update User</button>
+            </form>
+        </div>
+    </div>
+    <div class="column">
+        <div class="table-container">
+            <h2>Sample Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>ID</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function registerUser() {
+            var user = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }
+            console.log(user)
+            var addUser = new XMLHttpRequest();
+            addUser.onreadystatechange = function () {
+                if (addUser.readyState === 4 && addUser.status === 201) {
+                    console.log("User Added")
+                }
+            }
+            addUser.open("POST", "http://localhost:3000/users");
+            addUser.setRequestHeader('content-type', 'application/json');
+            addUser.send(JSON.stringify(user))
+        }
+        var users = []
+        function getAllUsers() {
+            var getUsers = new XMLHttpRequest();
+            getUsers.onreadystatechange = function () {
+                if (getUsers.readyState === 4 && getUsers.status === 200) {
+                    console.log("User Added", JSON.parse(getUsers.response));
+                    users = JSON.parse(getUsers.response);
+                    displayUsers()
+                }
+            }
+            getUsers.open("GET", "http://localhost:3000/users");
+            getUsers.send()
+        }
+
+        getAllUsers();
+
+        function displayUsers(){
+            document.querySelector("tbody").innerHTML = ""
+            users.map((userObj,i)=>{
+                var myTr = document.createElement("tr")
+                for(a in userObj){
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = userObj[a]
+                    myTr.appendChild(myTd)
+                }
+                var editTd = document.createElement("td")
+                var deleteTd = document.createElement("td")
+
+                var editbtn = document.createElement('button');
+                editbtn.setAttribute("onclick","edituser("+i+")")
+                var deleteBtn = document.createElement('button');
+                editTd.appendChild(editbtn);
+                deleteTd.appendChild(deleteBtn)
+                editbtn.innerHTML = "Edit User";
+                deleteBtn.innerHTML = "Delete User"
+                deleteBtn.setAttribute('onclick','deleteUser('+i+')')
+                myTr.appendChild(editTd)
+                myTr.appendChild(deleteTd)
+                document.querySelector("tbody").appendChild(myTr)
+            })
+          
+        }
+        function edituser(i){
+          gIndex = i;
+          var userToEdit = users[i]
+         for(a in userToEdit){
+          if(a !== 'id'){
+            document.getElementById(a).value = userToEdit[a]
+          }
+         }
+         document.getElementById("addUserBtn").style.display="none"
+         document.getElementById("updateUserBtn").style.display="block"
+        }
+
+        function updateUser(){
+            var user = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }
+
+            var addUser = new XMLHttpRequest();
+            addUser.onreadystatechange = function () {
+                if (addUser.readyState === 4 && addUser.status === 201) {
+                    console.log("User Added")
+                }
+            }
+            addUser.open("PUT", "http://localhost:3000/users/"+users[gIndex].id);
+            addUser.setRequestHeader('content-type', 'application/json');
+            addUser.send(JSON.stringify(user))
+        }
+
+        function deleteUser(i){
+            var addUser = new XMLHttpRequest();
+            addUser.onreadystatechange = function () {
+                if (addUser.readyState === 4 && addUser.status === 200) {
+                    console.log("User Deleted")
+                }
+            }
+            addUser.open("DELETE", "http://localhost:3000/users/"+users[i].id);
+            addUser.send()
+        }
+    </script>
+</body>
+
+</html>
