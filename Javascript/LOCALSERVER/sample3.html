@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2 class="surya">User Registration Form</h2>
+
+    <form id="nethaji">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="button" onclick="userdata()">get detials</button>
+    </form>
+
+
+
+    <script>
+
+
+        function userdata() {
+
+            var name = {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                email: document.getElementById("email").value
+            }
+            console.log(name)
+
+
+            var postdata = new XMLHttpRequest();
+            postdata.onreadystatechange = function () {
+                if (postdata.readyState == 4 && postdata.status == 201) {
+                    console.log("users add successfully")
+                }
+            }
+
+            postdata.open("post", "http://localhost:3000/users/")
+            postdata.setRequestHeader("content-type", "application/json");
+            postdata.send(JSON.stringify(name))
+
+            clearuser()
+
+        }
+
+        function clearuser() {
+            username: document.getElementById("username").value = ""
+            password: document.getElementById("password").value = ""
+            email: document.getElementById("email").value = ""
+        }
+    </script>
+</body>
+
+</html>

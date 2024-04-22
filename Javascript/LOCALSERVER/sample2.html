@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Form</title>
+  <link rel="stylesheet" href="./sample2.css">
+</head>
+
+<body>
+
+
+  <div class="form-container">
+    <h2>Signup Form</h2>
+    <form id="signup-form" action="#" method="POST">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <button type="button" onclick="addUser()">Sign Up</button>
+      </div>
+    </form>
+  </div>
+
+
+
+
+  <script>
+    function addUser() {
+      var user = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        username: document.getElementById('username').value
+      }
+      console.log(user)
+      var postData = new XMLHttpRequest();
+      postData.onreadystatechange = function () {
+        if (postData.readyState == 4 && postData.status == 201) {
+          console.log("User Added Successfully")
+        }
+      }
+      postData.open("POST", "http://localhost:3000/users");
+      postData.setRequestHeader("content-type", "application/json");
+      postData.send(JSON.stringify(user));
+
+    }
+
+    function deleteUser() {
+      var postData = new XMLHttpRequest();
+      postData.onreadystatechange = function () {
+        if (postData.readyState == 4 && postData.status == 200) {
+          console.log("User Added Successfully")
+        }
+      }
+      postData.open("DELETE", "http://localhost:3000/users/");
+      postData.send();
+    }
+
+    deleteUser()
+
+
+
+  </script>
+</body>
+
+</html>
