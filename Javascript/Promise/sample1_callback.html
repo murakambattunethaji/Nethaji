@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var users = []
+        function getAllUsers(displayUsers){
+            var getUsers = new XMLHttpRequest();
+            getUsers.onreadystatechange = function () {
+                if (getUsers.readyState === 4 && getUsers.status === 200) {
+                    console.log("User Added", JSON.parse(getUsers.response));
+                    users = JSON.parse(getUsers.response);
+                    displayUsers()
+                }
+            }
+            getUsers.open("GET", "http://localhost:3000/users");
+            getUsers.send()
+        }
+
+        function displayUsers(){
+            console.log(users)
+        }
+        getAllUsers(displayUsers);
+    
+
+    </script>
+</body>
+</html>
