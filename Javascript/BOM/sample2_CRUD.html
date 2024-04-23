@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        #updateUserBtn{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form action="#" method="post">
+            <input type="text" id="fname" placeholder="First Name" required>
+            <input type="text" id="lname" placeholder="Last Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="button" value="Register" onclick="addUser()" id="addUserBtn">
+            <input type="button" value="Update User" onclick="updateUser()" id="updateUserBtn">
+        </form>
+    </div>
+    <script>
+        function addUser() {
+            var user = {
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            }
+            var addUser = new XMLHttpRequest();
+            addUser.onreadystatechange = function () {
+                if (addUser.readyState === 4 && addUser.status === 201) {
+                    window.location.href = './displayUsers.html'
+                }
+            }
+            addUser.open("POST", "http://localhost:3000/users");
+            addUser.setRequestHeader('content-type', 'application/json');
+            addUser.send(JSON.stringify(user))
+            console.log(user)
+        }
+        var id = window.location.search.slice(1)
+
+        if(id){
+            var getUsers = new XMLHttpRequest();
+            document.getElementById("updateUserBtn").style.display="block"
+            document.getElementById("addUserBtn").style.display="none"
+            getUsers.onreadystatechange = function () {
+                if (getUsers.readyState === 4 && getUsers.status === 200) {
+                    console.log("User Added", JSON.parse(getUsers.response));
+                    var user = JSON.parse(getUsers.response);
+                    for(a in user){
+                       if(a  !== "id"){
+                        document.getElementById(a).value = user[a]
+                       }
+                    }
+                }
+            }
+            getUsers.open("GET", "http://localhost:3000/users/"+id);
+            getUsers.send()
+        }
+        console.log(id)
+
+    </script>
+</body>
+
+</html>
