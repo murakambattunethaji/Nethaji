@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var users = []
+        async function getDataFromServer() {
+            // fetch("http://localhost:3000/users")
+
+            // .then((response) => {
+            //     return response.json()
+            // }).then((data) => {
+            //     users = data;
+            // })
+
+            var response = await fetch("http://localhost:3000/users");
+            var data = await response.json();
+            users = data
+            displayUsers();
+        };
+        function displayUsers() {
+            console.log(users)
+        };
+
+
+        getDataFromServer();
+        // displayUsers();
+    </script>
+</body>
+
+</html>
