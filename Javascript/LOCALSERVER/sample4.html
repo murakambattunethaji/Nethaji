@@ -181,7 +181,7 @@
                     console.log("User Deleted")
                 }
             }
-            addUser.open("DELETE", "http://localhost:3000/users/"+users[i].id);
+            addUser.open("DELETE", "http://localhost:3000/users"+users[i].id);
             addUser.send()
         }
     </script>
