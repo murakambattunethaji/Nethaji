@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img,li{
+            cursor: pointer;
+        }
+        video{
+            display: none;
+        }
+        img{
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li onclick="playVideo('vid1')">Video 1</li>
+        <li onclick="playVideo('vid2')">Video 1</li>
+    </ul>
+    <video src="" id="myVideo" controls width="600px" height="450px"></video>
+    <img src="https://cdn.pixabay.com/photo/2016/02/01/12/33/play-1173551_1280.png" alt="" id="plaBtn" onclick="handlePlaybtn()">
+    <img src="https://media.istockphoto.com/id/890158078/vector/pause-button-vector.jpg?s=612x612&w=0&k=20&c=ga1wXjrJsE6gtTuF5xTMutftETwmmUzUzR6hHXBNpRI=" alt="" id="plaBtn" onclick="handlePausebtn()">
+    <script>
+        var element = document.getElementById("myVideo")
+
+        function playVideo(playVideo) {
+            element.style.display = "block"
+            console.log(playVideo)
+            console.log(element)
+            element.src = "./../" + playVideo + ".mp4";
+            
+        }
+        function handlePlaybtn() {
+            element.play()
+        }
+
+        function handlePausebtn(){
+            element.pause()
+        }
+
+    </script>
+</body>
+
+</html>

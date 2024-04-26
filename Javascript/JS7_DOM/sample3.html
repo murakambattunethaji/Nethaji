@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        var images = [{ imageName: "img1", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        { imageName: "img1", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        { imageName: "img2", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        { imageName: "img3", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        { imageName: "img4", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        { imageName: "img5", address: "https://media.istockphoto.com/id/513247652/photo/panoramic-beautiful-view-of-mount-ama-dablam.jpg?s=2048x2048&w=is&k=20&c=UPPXnDKS803pmXDdx6zjQ7nMqe9MZBHbc1KeXeDC0HE=" },
+        ]
+        var imageStyle = {
+            width: "300px",
+            border: '3px solid red',
+            margin: '10px',
+            float: 'left',
+            height: '250px'
+        }
+        for (i = 0; i < images.length; i++) {
+            var myImage = document.createElement("img")
+            myImage.src = images[i].address
+            for (a in imageStyle) {
+                myImage.style[a] = imageStyle[a]
+            }
+            if (images[i].imageName === "img5") {
+                myImage.style.border = "5px solid blue"
+            }
+            document.body.appendChild(myImage)
+        }
+    </script>
+</body>
+
+</html>

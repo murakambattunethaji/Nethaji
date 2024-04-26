@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" style="width: 100%;">
+        <thead>
+            <tr>
+                <th> Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Occupation</th>
+                <th>Hobbies</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        const userObject = {
+            name: "John Doe",
+            age: 30,
+            email: "john.doe@example.com",
+            location: "City, Country",
+            occupation: "Software Developer",
+            hobbies: ["Reading", "Hiking", "Cooking"],
+            image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        };
+        var myTr = document.createElement('tr')
+        for(a in userObject){
+            if(a !== "image"){
+                var myTd = document.createElement("td");
+            myTd.innerHTML = userObject[a]
+            myTr.appendChild(myTd)
+            }else{
+                var myTd = document.createElement("td");
+                var myImage = document.createElement("img")
+                myImage.src = userObject[a]
+                myTd.appendChild(myImage)
+                myTr.appendChild(myTd)
+            }
+        }
+        document.querySelector("tbody").appendChild(myTr)
+    </script>
+</body>
+
+</html>

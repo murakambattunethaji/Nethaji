@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1 Sec : 1000</p>
+    <p>1 Min : 60000</p>
+    <p>1 Hour : 3600000</p>
+    <p>1 Day : 86400000</p>
+    <p>1 Year : 31536000000</p>
+    <hr>
+    <form action="">
+        <label for="">DOB : </label>
+        <input type="date" name="" id="dob">
+        <button type="button" onclick="calculateAge()">Calculate Age</button>
+
+    </form>
+
+    <script>
+        function calculateAge() {
+            var dob = new Date(document.getElementById("dob").value);
+            var todaysDate = new Date();
+            var differenceInMillis = todaysDate - dob;
+            var totalDays = differenceInMillis / 86400000
+
+            var totalHours = differenceInMillis - (24 * 86400000);
+            console.log(totalHours / 3600000)
+            console.log("Total Days ", totalDays)
+        }
+    </script>
+</body>
+
+</html>

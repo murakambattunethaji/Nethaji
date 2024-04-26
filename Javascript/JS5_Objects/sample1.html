@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //{} Curly Braces which Represents the Object In Javascript ;
+        //myName:"Murali" is Called a Property . 
+        //myName is Property Name or  Key and Murali is Value of that property;
+        //We Should use ", " to separate multiple properties in an object if we want to add more than one property.
+
+
+        // Literal Way Of Creating Object
+        var person = {
+            myName: "Murali",
+            email: "vmurali100@gmail.com",
+            mobile:9663856625,
+            fullName:function (){
+                console.log("hello from Person Object")
+            }
+        };
+        // the Function inside Objects Are called as methods
+
+        // Constructor Function
+        // Constructor way Of Creating Objects
+        function Student(fname, lname) {
+            this.fname = fname;
+            this.lname = lname;
+        }
+        var std1 = new Student("Vijay", "Murali");
+
+        person.email = "vmurali100@gmail.com";
+        person['myName'] = "Murali Krishna ";
+        delete person.mobile;
+
+        person.fullName()
+
+        document.write("Name : " + person.myName + "<br/>");
+        document.write("Email : " + person['email'] + "<br/>");
+        console.log(person)
+    </script>
+</body>
+
+</html>

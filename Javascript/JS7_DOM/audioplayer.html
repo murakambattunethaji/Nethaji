@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 300px;
+            text-emphasis: none;
+            margin: auto;
+        }
+
+        li {
+            cursor: pointer;
+        }
+
+        .playing {
+            background: green;
+            color: white;
+            width: 100px;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>Song1</li>
+        <li>Song2</li>
+        <li>Song3</li>
+        <li>Song4</li>
+    </ul>
+    <audio src="./" controls></audio>
+    <script>
+        function removeClassnames(){
+            var allLis=document.querySelectorAll("li")
+            for (let index = 0; index < allLis.length; index++) {
+                const element = allLis[index].classList.remove('playing')
+                
+            }
+        }
+        var audioElement = document.querySelector("audio")
+        document.querySelector("ul").onclick = function (e) {
+            removeClassnames()
+            var clickedSong = e.target
+            clickedSong.classList.add("playing")
+            var clickedSong = e.target.innerHTML
+            audioElement.src = "./songs/" + clickedSong + ".mp3"
+            audioElement.play()
+        }
+    </script>
+</body>
+
+</html>

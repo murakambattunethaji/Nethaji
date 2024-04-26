@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="text-align: center;">
+    <button onclick="getDataFromServer()">Get Data</button>
+
+    <script>
+        function getDataFromServer() {
+            var getDataObj = new XMLHttpRequest();
+            getDataObj.onreadystatechange = function () {
+                if (getDataObj.readyState == 4 && getDataObj.status == 200) {
+                    var recevivedData = JSON.parse(getDataObj.response)
+                    console.log(recevivedData)
+                }
+            }
+        
+            const options = {
+                method: 'GET',
+                url: 'https://booking-com.p.rapidapi.com/v1/hotels/search',
+                params: {
+                    checkout_date: '2024-09-15',
+                    order_by: 'popularity',
+                    filter_by_currency: 'AED',
+                    room_number: '1',
+                    dest_id: '-553173',
+                    dest_type: 'city',
+                    adults_number: '2',
+                    checkin_date: '2024-09-14',
+                    locale: 'en-gb',
+                    units: 'metric',
+                    include_adjacency: 'true',
+                    children_number: '2',
+                    categories_filter_ids: 'class::2,class::4,free_cancellation::1',
+                    page_number: '0',
+                    children_ages: '5,0'
+                },
+                headers: {
+                    'X-RapidAPI-Key': 'IXEUAUo6gSmshyDa71pLNljSwKHRp1xt8bqjsn089SWjJ1GyuX',
+                    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+                }
+            };
+            
+            let urlWithParams = options.url + '?';
+            for (const [key, value] of Object.entries(options.params)) {
+                urlWithParams += `${encodeURIComponent(key)}=${encodeURIComponent(value)}&`;
+            }
+            urlWithParams = urlWithParams.slice(0, -1); 
+
+            getDataObj.open(options.method, urlWithParams, true);
+            getDataObj.send()
+
+            getDataObj.setRequestHeader('X-RapidAPI-Key', 'IXEUAUo6gSmshyDa71pLNljSwKHRp1xt8bqjsn089SWjJ1GyuX');
+            getDataObj.setRequestHeader('X-RapidAPI-Host', 'booking-com.p.rapidapi.com');
+            
+        }
+    </script>
+</body>
+
+</html>

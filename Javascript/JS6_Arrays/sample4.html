@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var friends = ["Sam", "Kumar", "Ram", "Ravi", "Murali", "Abhi", "Krishna", "SA"];
+
+
+        // The Following Statement Means , at least one Name should Match the Statement
+        // Some Method will return true , if any one values satisfy the Condition
+       
+        // var check = friends.some(function (val) {
+        //     return val.length >= 3
+        // });
+
+        // Every Method will return true , if all the values Satisfying the Condition
+        var check = friends.every(function (val) {
+            return val.length === 7
+        })
+
+        document.write("Check - ", check);
+
+    </script>
+</body>
+
+</html>

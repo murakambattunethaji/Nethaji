@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #updateUserBtn{
+        display: none;
+      }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label for="">First Name : </label>
+        <input type="text" name="" id="fname"> <br>
+        <label for="">Last Name : </label>
+        <input type="text" name="" id="lname"> <br>
+        <label for="">Email</label>
+        <input type="text" name="" id="email"> <br>
+        <button type="button" onclick="addUser()" id="addUserBtn">Add User </button>
+        <button type="button" onclick="updateUser()" id="updateUserBtn">Update User </button>
+    </form>
+    <table style="width: 100%;" border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script>
+        var users = [
+  {
+    "fname": "John",
+    "lname": "Doe",
+    "email": "john.doe@example.com"
+  },
+  {
+    "fname": "Jane",
+    "lname": "Smith",
+    "email": "jane.smith@example.com"
+  },
+  {
+    "fname": "Michael",
+    "lname": "Johnson",
+    "email": "michael.johnson@example.com"
+  },
+  {
+    "fname": "Emily",
+    "lname": "Brown",
+    "email": "emily.brown@example.com"
+  },
+  {
+    "fname": "David",
+    "lname": "Williams",
+    "email": "david.williams@example.com"
+  },
+  {
+    "fname": "Sarah",
+    "lname": "Jones",
+    "email": "sarah.jones@example.com"
+  },
+  {
+    "fname": "Matthew",
+    "lname": "Martinez",
+    "email": "matthew.martinez@example.com"
+  },
+  {
+    "fname": "Jessica",
+    "lname": "Garcia",
+    "email": "jessica.garcia@example.com"
+  },
+  {
+    "fname": "Daniel",
+    "lname": "Miller",
+    "email": "daniel.miller@example.com"
+  },
+  {
+    "fname": "Jennifer",
+    "lname": "Davis",
+    "email": "jennifer.davis@example.com"
+  }
+]
+
+        function addUser(){
+            var person = {
+                fname:document.getElementById('fname').value,
+                lname:document.getElementById('lname').value,
+                email:document.getElementById('email').value
+            }
+            console.log(person)
+            users.push(person);
+            displayUsers();
+            clearUser()
+        }
+
+        function clearUser(){
+            document.getElementById('fname').value=""
+            document.getElementById('lname').value=""
+            document.getElementById('email').value=""
+        }
+        function displayUsers(){
+            document.querySelector("tbody").innerHTML = ""
+            users.map((userObj,i)=>{
+                var myTr = document.createElement("tr")
+                for(a in userObj){
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = userObj[a]
+                    myTr.appendChild(myTd)
+                }
+                var editTd = document.createElement("td")
+                var deleteTd = document.createElement("td")
+
+                var editbtn = document.createElement('button');
+                editbtn.setAttribute("onclick","edituser("+i+")")
+                var deleteBtn = document.createElement('button');
+                editTd.appendChild(editbtn);
+                deleteTd.appendChild(deleteBtn)
+                editbtn.innerHTML = "Edit User";
+                deleteBtn.innerHTML = "Delete User"
+                deleteBtn.setAttribute('onclick','deleteUser('+i+')')
+                myTr.appendChild(editTd)
+                myTr.appendChild(deleteTd)
+                document.querySelector("tbody").appendChild(myTr)
+            })
+            // for(i=0;i<users.length;i++){
+            //     var myTr = document.createElement("tr")
+            //     var userObj = users[i];
+                // for(a in userObj){
+                //     var myTd = document.createElement("td");
+                //     myTd.innerHTML = userObj[a]
+                //     myTr.appendChild(myTd)
+                // }
+            //     document.querySelector("tbody").appendChild(myTr)
+            // }
+        }
+        displayUsers()
+
+
+        function deleteUser(i){
+            console.log("deleteUser called !!",i)
+            users.splice(i,1);
+            displayUsers()
+        }
+        var gIndex = null;
+        function edituser(i){
+          gIndex = i;
+          var userToEdit = users[i]
+         for(a in userToEdit){
+          document.getElementById(a).value = userToEdit[a]
+         }
+         document.getElementById("addUserBtn").style.display="none"
+         document.getElementById("updateUserBtn").style.display="block"
+        }
+
+
+        function updateUser(){
+          var person = {
+                fname:document.getElementById('fname').value,
+                lname:document.getElementById('lname').value,
+                email:document.getElementById('email').value
+            }
+            users[gIndex] = person;
+            displayUsers();
+            clearUser();
+            document.getElementById("updateUserBtn").style.display="none";
+            document.getElementById("addUserBtn").style.display="block"
+
+        }
+    </script>
+</body>
+
+</html>

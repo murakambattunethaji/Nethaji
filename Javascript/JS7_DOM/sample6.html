@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Mobile</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        var person = {
+            fname: "Murali",
+            lname: "krishna",
+            email: "murali@gmail.com",
+            city: 'Chittoor',
+            state: "AP",
+            mobile: 9663856625
+        }
+        var myTr = document.createElement("tr")
+        for (a in person) {
+            var myTd = document.createElement("td");
+            myTd.innerHTML = person[a]
+            myTr.appendChild(myTd)
+        }
+        document.querySelector("tbody").appendChild(myTr)
+
+        // var myTr = document.createElement("tr")
+        // document.querySelector("tbody").appendChild(myTr)
+
+        // var td1 = document.createElement("td")
+        // td1.innerHTML = person.fname;
+        // var td2 = document.createElement("td")
+        // td2.innerHTML = person.lname
+        // var td3 = document.createElement("td")
+        // td3.innerHTML = person.email
+
+        // myTr.appendChild(td1)
+        // myTr.appendChild(td2)
+        // myTr.appendChild(td3)
+    </script>
+</body>
+
+</html>

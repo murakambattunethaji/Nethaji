@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const subjectMarks = [
+            { subject: "Mathematics", marks: 85 },
+            { subject: "English", marks: 78 },
+            { subject: "Science", marks: 90 },
+            { subject: "History", marks: 82 },
+            { subject: "Computer Science", marks: 95 }
+        ];
+
+        var totalMarks = subjectMarks.reduce((a, b) => {
+            if (a instanceof Object && a instanceof Object) {
+                return a.marks + b.marks
+            }else{
+                return a+b.marks
+            }
+        })
+
+        var avg = totalMarks/subjectMarks.length
+        console.log(totalMarks);
+        console.log("AVG ::",avg)
+
+        switch (true) {
+            case avg > 75:
+                console.log("He is Distinct ::")
+                break;
+            case avg >=65:
+            console.log("He is First Class ::")
+                break;
+            default:
+                break;
+        }
+
+        var myName = ["M","U","R","A","L","I"]
+        console.log(myName.slice(2))
+        console.log(myName.indexOf("L"))
+        // console.log(myName.join(""))
+        console.log(myName.at(-3))
+        
+    </script>
+
+</body>
+
+</html>

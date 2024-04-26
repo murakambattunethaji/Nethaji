@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var nos = "ANC"
+        // var pattern = /[0-9]/
+
+        // console.log(pattern.test(nos))
+
+        // var statement = "96639A56625"
+
+        // var pattern = /^\d+$/
+        // console.log(pattern.test(statement))
+
+        var statement = "i am murali . my mail id is murali@gmail.com , you can contact me on murali@gmail.com";
+
+        // var pattern = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+
+        var patterm = /murali@gmail.com/g
+
+        var results = statement.matchAll(patterm)
+        console.log(results)
+
+        for(match of results){
+            console.log(match)
+        }
+        // console.log(statement.matchAll("murali@gmail.com"))
+
+     
+    </script>
+</body>
+</html>
