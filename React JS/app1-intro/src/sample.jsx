@@ -11,3 +11,5 @@ export const student = () => {
     </div>
   )
 }
+
+export default student
