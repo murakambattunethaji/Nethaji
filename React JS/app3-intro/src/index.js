@@ -5,12 +5,14 @@ import App from './App';
 import Info from './Info';
 import Sample from './Sample';
 import Nesha from './Nesha'
+import Siva from "./Siva"
+import Hello from "./Hello"
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
+    <Hello />
   </React.StrictMode>
 );
 
