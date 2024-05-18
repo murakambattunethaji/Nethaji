@@ -7,12 +7,16 @@ import Sample from './Sample';
 import Nesha from './Nesha'
 import Siva from "./Siva"
 import Hello from "./Hello"
+import Project from "./Project"
+import A from "./A"
+import C from "./C"
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Hello />
+    <Project/>
   </React.StrictMode>
 );
 
