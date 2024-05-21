@@ -11,6 +11,7 @@ export const Name = () => {
     return <div>
         <button onClick={changename}>click convert in to capital letter</button>
         <h1>your name converted in to capital letter !!   {names}</h1>
+         
     </div>
 }
 
