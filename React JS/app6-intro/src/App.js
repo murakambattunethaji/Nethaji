@@ -12,11 +12,13 @@ import { LanguageLearningApp } from "./Assinment/LanguageLearningApp10";
 import { MovieDatabase } from "./Assinment/MovieDatabase4";
 import { MusicBandManager } from "./Assinment/MusicBandManager17";
 import { MusicPlayer } from "./Assinment/MusicPlayer2";
+import { PetAdoptionCenter } from "./Assinment/PetAdoptionCenter23";
 import { ProjectManagementToo } from "./Assinment/ProjectManagementToo21";
 import { RealEstateListings } from "./Assinment/RealEstateListings20";
 import RecipeBook from "./Assinment/RecipeBook3";
 import { RecipeGenerator } from "./Assinment/RecipeGenerator15";
 import { StudentEnrollmentSystem } from "./Assinment/StudentEnrollmentSystem1";
+import { SubscriptionService } from "./Assinment/SubscriptionService22";
 import { TaskTracker } from "./Assinment/TaskTracker11";
 import { WeatherApp } from "./Assinment/WeatherApp12";
 
@@ -45,6 +47,8 @@ function App() {
       <FitnessChallengeTracke/>
       <RealEstateListings/>
       <ProjectManagementToo/>
+      <SubscriptionService/>
+      <PetAdoptionCenter/>
     </div>
   );
 }
