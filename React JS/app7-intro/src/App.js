@@ -8,6 +8,8 @@ import MovieDatabase from "./Assinments/MovieDatabase4";
 import MusicPlaye from "./Assinments/MusicPlaye2";
 import RecipeBook from "./Assinments/RecipeBook3";
 import StudentEnrollmentSystem from "./Assinments/StudentEnrollmentSystem1";
+import TaskTracker from "./Assinments/TaskTracker11";
+import WeatherApp from "./Assinments/WeatherApp12";
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
       <GameCharacter/>
       <EcommerceCart/>
       <LanguageLearningApp/>
+      <TaskTracker/>
+      <WeatherApp/>
     </div>
   );
 }
