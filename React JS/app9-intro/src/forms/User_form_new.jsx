@@ -36,6 +36,16 @@ export class User_form_new extends Component {
         this.setState(newstate)
     }
 
+    deleteuser=(i)=>{
+        const newstate = {...this.state}
+        newstate.allusers.splice(i,1)
+        this.setState(newstate)
+    }
+
+    edituser=()=>{
+        
+    }
+
     render() {
         return <div>
 
@@ -65,14 +75,14 @@ export class User_form_new extends Component {
                 </thead>
 
                 <tbody>
-                    {this.state.allusers.map((obj) => {
+                    {this.state.allusers.map((obj,i) => {
                         return (
                             <tr>
                                 <td>{obj.fname}</td>
                                 <td>{obj.lname}</td>
                                 <td>{obj.email}</td>
                                 <td><button type="button" onClick={()=>{}}>edit btn</button></td>
-                                <td><button type="button" onClick={()=>{}}>delete btn</button></td>
+                                <td><button type="button" onClick={()=>{this.deleteuser(i)}}>delete btn</button></td>
                             </tr>
                         )
                     })}
