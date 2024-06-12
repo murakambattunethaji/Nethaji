@@ -17,7 +17,9 @@ export class User_form_update extends Component {
     handlechange = (e) => {
         const inputname = e.target.name
         const newstate = { ...this.state }
-        newstate.userdetail[inputname] = e.target.value
+        const newstateobj={...this.state.userdetail}
+        newstateobj[inputname] = e.target.value
+        newstate.userdetail=newstateobj
         this.setState(newstate)
 
     }

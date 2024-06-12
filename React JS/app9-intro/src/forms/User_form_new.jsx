@@ -10,6 +10,7 @@ export class User_form_new extends Component {
             email: "",
         },
         allusers: [],
+        showupdatebtn:true,
     }
 
     handlechange = (e) => {
@@ -42,8 +43,10 @@ export class User_form_new extends Component {
         this.setState(newstate)
     }
 
-    edituser=()=>{
-        
+    edituser=(obj)=>{
+        const newstate = {...this.state}
+        newstate.userdetails = obj
+        this.setState(newstate)
     }
 
     render() {
@@ -60,7 +63,12 @@ export class User_form_new extends Component {
                 <label htmlFor="">email : </label>
                 <input type="text" name="email" value={this.state.userdetails.email} onChange={this.handlechange} />
                 <br /> <br />
-                <button type="button" onClick={this.adduser}>add user</button>
+                
+                {this.state.showupdatebtn ?(
+                    <button type="button" onClick={this.adduser}>add user</button>
+                ):(
+                    <button type="button" onClick={this.edituser}>update user</button>
+                )}
             </form>
 
 
@@ -81,7 +89,7 @@ export class User_form_new extends Component {
                                 <td>{obj.fname}</td>
                                 <td>{obj.lname}</td>
                                 <td>{obj.email}</td>
-                                <td><button type="button" onClick={()=>{}}>edit btn</button></td>
+                                <td><button type="button" onClick={()=>{this.edituser(obj)}}>edit btn</button></td>
                                 <td><button type="button" onClick={()=>{this.deleteuser(i)}}>delete btn</button></td>
                             </tr>
                         )
