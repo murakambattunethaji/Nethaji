@@ -15,7 +15,6 @@ export class User_forms extends Component {
 
     handlechange = (e) => {
         const inputname = e.target.name
-        console.log(inputname)
         const newstate = { ...this.state }
         newstate.userdetail[inputname] = e.target.value
         this.setState(newstate)
@@ -39,9 +38,9 @@ export class User_forms extends Component {
         this.setState(newstate)
     }
 
-    deleteuser=(i)=>{
-        const newstate={...this.state}
-        newstate.allusers.splice(i,1)
+    deleteuser = (i) => {
+        const newstate = { ...this.state }
+        newstate.allusers.splice(i, 1)
         this.setState(newstate)
     }
 
@@ -74,12 +73,12 @@ export class User_forms extends Component {
                 </thead>
 
                 <tbody>
-                    {this.state.allusers.map((obj,i) => {
+                    {this.state.allusers.map((obj, i) => {
                         return <tr>
                             <td>{obj.fname}</td>
                             <td>{obj.lname}</td>
                             <td>{obj.email}</td>
-                            <td><button type="button" onClick={()=>{this.deleteuser(i)}}>Delete</button></td>
+                            <td><button type="button" onClick={() => { this.deleteuser(i) }}>Delete</button></td>
 
                         </tr>
                     })}
