@@ -6,8 +6,8 @@ import { Users } from './Function_Components/Users';
 function App() {
   return (
     <div>
-     {/* <Parent_component/> */}
-     <Users/>
+      {/* <Parent_component/> */}
+      <Users />
     </div>
   );
 }
