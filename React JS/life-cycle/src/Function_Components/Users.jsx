@@ -1,116 +1,124 @@
-import { Component } from "react";
+// src/RegistrationForm.js
+import React, { useState } from 'react';
 
+const RegistrationForm = () => {
+  const [formData, setFormData] = useState({
+    id: '',
+    name: '',
+    course: '',
+    branch: '',
+    rollno: '',
+    email: '',
+    username: '',
+    about: '',
+    password: ''
+  });
+  const [submissions,setsubmissions]=useState([])
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
-export class Users extends Component {
+  const getData=()=>{
+    fetch("http://localhost:3000/users").then((response)=>{
+        return response.json()
+    }).then(data=>{
+        console.log(data)
+        setsubmissions(data)
+    })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    fetch("http://localhost:3000/users",{
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+    }).then(()=>{
+        getData()
+    })
+    // Handle form submission
+  };
 
-    state = {
-        userdetails: {
-            fname: "",
-            lname: "",
-            email: "",
-        },
-        allusers: [],
-        showupdatebtn: true,
-    }
+  return (
+    <>
+    <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: 'auto' }}>
+      <h2>Registration form</h2>
+      <div>
+        <label>Id:</label>
+        <input type="text" name="id" value={formData.id} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Name:</label>
+        <input type="text" name="name" value={formData.name} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Course:</label>
+        <input type="text" name="course" value={formData.course} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Branch:</label>
+        <input type="text" name="branch" value={formData.branch} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Rollno:</label>
+        <input type="text" name="rollno" value={formData.rollno} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Email Address:</label>
+        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+      </div>
+      <div>
+        <label>User Name:</label>
+        <input type="text" name="username" value={formData.username} onChange={handleChange} />
+      </div>
+      <div>
+        <label>About Us:</label>
+        <textarea name="about" value={formData.about} onChange={handleChange}></textarea>
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+    <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Branch</th>
+            <th>Rollno</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>About</th>
+          </tr>
+        </thead>
+        <tbody>
+          {submissions.map((submission, index) => (
+            <tr key={index}>
+              <td>{submission.id}</td>
+              <td>{submission.name}</td>
+              <td>{submission.course}</td>
+              <td>{submission.branch}</td>
+              <td>{submission.rollno}</td>
+              <td>{submission.email}</td>
+              <td>{submission.username}</td>
+              <td>{submission.about}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+};
 
-    handlechange = (e) => {
-        const inputname = e.target.name
-        const newstate = { ...this.state }
-        const newstateobj = { ...this.state.userdetails }
-        newstateobj[inputname] = e.target.value
-        newstate.userdetails = newstateobj
-        this.setState(newstate)
-    }
-
-    adduser = () => {
-        const newstate = { ...this.state }
-        newstate.allusers.push({ ...this.state.userdetails })
-        this.setState(newstate)
-        this.clearform()
-    }
-
-    clearform = () => {
-        const newstate = { ...this.state }
-        newstate.userdetails = {
-            fname: "",
-            lname: "",
-            email: "",
-        }
-        this.setState(newstate)
-    }
-
-    deleteuser = (i) => {
-        const newstate = { ...this.state }
-        newstate.allusers.splice(i, 1)
-        this.setState(newstate)
-    }
-
-    edituser = (obj) => {
-        const newstate = { ...this.state }
-        newstate.userdetails = obj
-        newstate.showupdatebtn = false
-        this.setState(newstate)
-    }
-
-    updateuser = () => {
-       const newstateusers = {...this.state.allusers}
-       newstateusers[this.state.index]=this.state.userdetails
-       this.setState({allusers:newstateusers,index:null})
-       this.clearform()
-    }
-
-    render() {
-        return <div>
-
-            <h1>welcome to react js</h1>
-            <form>
-                <label htmlFor="">fname : </label>
-                <input type="text" name="fname" value={this.state.userdetails.fname} onChange={this.handlechange} />
-                <br />
-                <label htmlFor="">lname : </label>
-                <input type="text" name="lname" value={this.state.userdetails.lname} onChange={this.handlechange} />
-                <br />
-                <label htmlFor="">email : </label>
-                <input type="text" name="email" value={this.state.userdetails.email} onChange={this.handlechange} />
-                <br /> <br />
-
-                {this.state.showupdatebtn ? (
-                    <button type="button" onClick={this.adduser}>add user</button>
-                ) : (
-                    <button type="button" onClick={this.edituser}>update user</button>
-                )}
-            </form>
-
-
-            <table border={1}>
-
-                <thead>
-                    <td>fname</td>
-                    <td>lname</td>
-                    <td>email</td>
-                    <td>edit user</td>
-                    <td>delete user</td>
-                </thead>
-
-                <tbody>
-                    {this.state.allusers.map((obj, i) => {
-                        return (
-                            <tr>
-                                <td>{obj.fname}</td>
-                                <td>{obj.lname}</td>
-                                <td>{obj.email}</td>
-                                <td><button type="button" onClick={() => { this.edituser(obj) }}>edit btn</button></td>
-                                <td><button type="button" onClick={() => { this.deleteuser(i) }}>delete btn</button></td>
-                            </tr>
-                        )
-                    })}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-    }
-}
+export default RegistrationForm;
