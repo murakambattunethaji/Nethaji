@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       {/* <Parent_component/> */}
-      <Users />
+      <  Users />
     </div>
   );
 }
