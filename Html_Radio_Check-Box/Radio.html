@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <label for="">Radio :</label>
+        <input type="radio" name="gender" value="male"> male
+        <input type="radio" name="gender" value="female"> female
+        <input type="radio" name="gender" value="other"> other
+        <br> <br>
+        <!-- <button type="button" onclick="getgendervalue()">get radio data</button> -->
+        <button type="button" onclick="setgendervalue()">set radio data</button>
+
+    </form>
+
+    <script>
+        var allradiobtn = document.getElementsByName("gender");
+
+        function getgendervalue() {
+
+            var person = {
+                gender: ''
+            }
+
+            for (i = 0; i < allradiobtn.length; i++) {
+                if (allradiobtn[i].checked) {
+
+                    person.gender = allradiobtn[i].value
+
+                }
+            }
+            console.log(person)
+        }
+
+        function setgendervalue() {
+            var person = {
+                gender: "female",
+                
+            }
+            for (i = 0; i < allradiobtn.length; i++) {
+                if (allradiobtn[i].value == person.gender) {
+                    allradiobtn[i].checked = true
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

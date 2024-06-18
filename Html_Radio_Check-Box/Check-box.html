@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+
+        <label>subject : </label>
+        <input type="checkbox" value="HTML" name="sbject">HTML
+        <input type="checkbox" value="CSS" name="sbject">CSS
+        <input type="checkbox" value="JAVASCRIPT" name="sbject">JAVASCRIPT
+        <input type="checkbox" value="REACT-JS" name="sbject">REACT
+        <br> <br>
+        <!-- <button type="button" onclick="selectsubject()">select subject</button> -->
+        <button type="button" onclick="setselectsubject()">set select subject</button>
+
+
+    </form>
+
+    <script>
+        var allchechboxbtn = document.getElementsByName("sbject")
+
+
+        function selectsubject() {
+            var person = {
+                subject: []
+            }
+
+            for (i = 0; i < allchechboxbtn.length; i++) {
+                if (allchechboxbtn[i].checked) {
+                    person.subject.push(allchechboxbtn[i].value)
+                }
+            }
+            console.log(person)
+        }
+
+        function setselectsubject() {
+            var person = {
+                subject: ['HTML', 'REACT-JS']
+            }
+            person.subject.forEach(function(sub){
+                for(i=0;i<allchechboxbtn.length;i++){
+                    if(allchechboxbtn[i].value==sub){
+                        allchechboxbtn[i].checked=true
+                    }
+                }
+            })
+            console.log(person)
+
+        }
+
+
+    </script>
+</body>
+
+</html>
