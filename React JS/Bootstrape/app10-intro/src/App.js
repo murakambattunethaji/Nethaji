@@ -1,5 +1,4 @@
 import User from './Bootstrape-Component/Users';
-import Person from './Bootstrape-Component/Persons';
 import Details from './Bootstrape-Component/Details';
 import VijayDinesh from './Bootstrape-Component/Vijaydinesh';
 import Sai from './Bootstrape-Component/Sai';
