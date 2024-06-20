@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-const Quick_Contact = () => {
+const Sai = () => {
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -217,4 +217,4 @@ const Quick_Contact = () => {
   );
 };
 
-export default Quick_Contact;
+export default Sai;
