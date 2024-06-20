@@ -30,7 +30,9 @@ const User = () => {
         setAllUsers(newAllUsers);
     };
 
-    const updateUser = () => { };
+    const updateUser = () => { 
+        
+    };
 
     const clearForm = () => {
         setUserDetails({
@@ -112,7 +114,7 @@ const User = () => {
                                 Submit
                             </button>
                         </form>
-                    </div>
+                    </div>  
                     <div className="col-9">
                         <table className="table table-striped table-hover">
                             <thead>
