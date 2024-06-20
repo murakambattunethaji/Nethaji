@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Person = () => {
     const [userDetails, setUserDetails] = useState({
@@ -6,11 +6,17 @@ const Person = () => {
         Email: '',
         Password: '',
         Gender: '',
-        ActiveRole: '',
+        Course: '',
 
     })
 
     const [alluser, setalluser] = useState([])
+    const [index, setIndex] = useState(null)
+
+    useEffect(() => {
+        const newuser = JSON.parse(localStorage.getItem("users"))
+        newuser && setalluser(newuser)
+    }, [])
 
     const handleChange = (e) => {
         const newuser = { ...userDetails }
@@ -22,20 +28,28 @@ const Person = () => {
         const newalluser = [...alluser]
         newalluser.push(userDetails)
         setalluser(newalluser)
+        localStorage.setItem("users", JSON.stringify(newalluser))
         clearform()
     }
-    const editUser = (usr) => { 
+    const editUser = (usr, i) => {
         setUserDetails(usr)
+        setIndex(i)
     }
     const deleteUser = (index) => {
-        const newalluser=alluser.filter((_,i)=> i !== index)
+        const newalluser = alluser.filter((_, i) => i !== index)
         setalluser(newalluser)
-     }
-    // const updateUser = () => {
+        localStorage.setItem("users", JSON.stringify(newalluser))
+        clearform()
+    }
+    const updateUser = () => {
+        const newuser = [...alluser]
+        newuser[index] = userDetails
+        setalluser(newuser)
+        setIndex(null)
+        clearform()
+    }
 
-    //  }
-
-    const clearform = () =>{
+    const clearform = () => {
         setUserDetails({
             Name: '',
             Email: '',
@@ -44,6 +58,8 @@ const Person = () => {
             ActiveRole: '',
         })
     }
+
+   
 
     const { name, email, password, gender, course } = userDetails
 
@@ -71,7 +87,9 @@ const Person = () => {
                                     className="form-control"
                                     name="name"
                                     value={name}
-                                    onChange={handleChange} />
+                                    onChange={(e)=>{
+                                        handleChange(e)
+                                        }} />
                             </div>
                             <br />
 
@@ -108,8 +126,9 @@ const Person = () => {
                                         className="form-check-input"
                                         type="radio"
                                         name="gender"
-                                        value={gender}
-                                        onChange={(e) => { handleChange(e) }}
+                                        checked={gender==="male"}
+                                        value="male"
+                                        onChange={handleChange}
 
                                     />
                                     <label className="form-check-label">Male</label>
@@ -119,11 +138,14 @@ const Person = () => {
                                         className="form-check-input"
                                         type="radio"
                                         name="gender"
-                                        onChange={(e) => { handleChange(e) }}
+                                        value="female"
+                                        checked={gender==="female"}
+                                        onChange={ handleChange}
 
 
                                     />
-                                    <label className="form-check-label" for="flexRadioDefault2">
+                                    <label className="form-check-label"
+                                        for="flexRadioDefault2">
                                         Female
                                     </label>
                                 </div>
@@ -133,7 +155,7 @@ const Person = () => {
                             <div className="mb-3">
                                 <label htmlFor="" className="form-label">Course</label>
                                 <select className="form-select"
-                                 onChange={(e) => { handleChange(e) }}
+                                    onChange={(e) => { handleChange(e) }}
                                     name="course"
                                     value={course}
                                 >
@@ -146,16 +168,32 @@ const Person = () => {
 
 
 
+                           {index !== null ?(
+                               <button type="button"
+                               className="btn btn-primary"
+                               onClick={updateUser}
+                               
+                               >
+                                updateUser
+                               </button>
+                           ):(
+                                 <button
+                                 type="button"
+                                 className="btn btn-primary"
+                                 onClick={adduser}
+                                 >
+                                    add user
+                                 </button>
+                           )}
 
 
 
 
 
-
-                            <button type="button" 
-                            className="btn btn-primary"
-                            onClick={adduser}
-                            >Add student details</button>
+                            {/* <button type="button"
+                                className="btn btn-primary"
+                                onClick={adduser}
+                            >Add student details</button> */}
 
                         </form>
                     </div>
@@ -174,16 +212,22 @@ const Person = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {alluser.map((usr,index) => {
-                                    return( <tr key={index}>
+                                {alluser.map((usr, i) => {
+                                    return (<tr key={i}>
                                         <td>{usr.name}</td>
                                         <td>{usr.email}</td>
                                         <td>{usr.password}</td>
                                         <td>{usr.gender}</td>
                                         <td>{usr.course}</td>
 
-                                        <td><button className="btn btn-primary" onClick={editUser(usr)}>Edit</button></td>
-                                        <td><button className="btn btn-danger" onClick={deleteUser(index)}>Delete</button></td>
+                                        <td><button className="btn btn-primary"
+                                         onClick={()=>{
+                                            editUser(usr,i)}}>Edit</button></td>
+
+                                        <td><button className="btn btn-danger"
+                                         onClick={()=>
+                                           deleteUser(i)
+                                         }>Delete</button></td>
 
                                     </tr>
                                     )

@@ -3,13 +3,15 @@ import './App.css';
 import User from './Bootstrape-Component/Users';
 import Person from './Bootstrape-Component/Persons';
 import Details from './Bootstrape-Component/Details';
+import VijayDinesh from './Bootstrape-Component/Vijaydinesh';
 
 function App() {
   return (
     <div>
       {/* <User /> */}
-      <Person/>
+      {/* <Person/> */}
       {/* <Details/> */}
+      <VijayDinesh/>
     </div>
   );
 }

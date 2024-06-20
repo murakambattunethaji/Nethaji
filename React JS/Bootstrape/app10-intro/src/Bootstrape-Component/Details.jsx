@@ -8,9 +8,10 @@ const Details = () => {
         role: "",
         gender: "",
         subjects: [],
-    });
+    }); 
     const [allUsers, setAllUsers] = useState([]);
     const [index, setIndex] = useState(null);
+        
     useEffect(() => {
         const newUsers = JSON.parse(localStorage.getItem("users"));
         newUsers && setAllUsers(newUsers);
@@ -59,32 +60,35 @@ const Details = () => {
             subjects: [],
         });
     };
-    const handleCheckboxChange = (e) => {
-        console.log(e.target.checked);
-        const newUserDetails = { ...userDetails };
-        if (e.target.checked) {
-            newUserDetails.subjects.push(e.target.value);
-        } else {
-            newUserDetails.subjects = newUserDetails.subjects.filter((val) => {
-                return val !== e.target.value;
-            });
-        }
-        setUserDetails(newUserDetails);
-    };
-    const validate = () => {
-        for (let a in userDetails) {
-            if (a !== "subjects") {
-                if (userDetails[a] === "") {
-                    return true;
-                }
-            } else {
-                if (userDetails[a].length === 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    };
+    // const handleCheckboxChange = (e) => {
+    //     console.log(e.target.checked);
+    //     const newUserDetails = { ...userDetails };
+    //     if (e.target.checked) {
+    //         newUserDetails.subjects.push(e.target.value);
+    //     } else {
+    //         newUserDetails.subjects = newUserDetails.subjects.filter((val) => {
+    //             return val !== e.target.value;
+    //         });
+    //     }
+    //     setUserDetails(newUserDetails);
+    // };
+
+
+    // const validate = () => {
+    //     for (let a in userDetails) {
+    //         if (a !== "subjects") {
+    //             if (userDetails[a] === "") {
+    //                 return true;
+    //             }
+    //         } else {
+    //             if (userDetails[a].length === 0) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // };
+    
     const { email, password, role, gender, subjects } = userDetails;
 
     return (
