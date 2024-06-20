@@ -61,6 +61,8 @@ const Nethaji = () => {
 
    
 
+   
+
     const { name, email, password, gender, course } = userDetails
 
 
@@ -71,7 +73,7 @@ const Nethaji = () => {
                 <nav className="navbar bg-body-tertiary">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">
-                            Student Details Form
+                            Nethaji Form
                         </a>
                     </div>
                 </nav>
@@ -181,6 +183,7 @@ const Nethaji = () => {
                                  type="button"
                                  className="btn btn-primary"
                                  onClick={adduser}
+                                 
                                  >
                                     add user
                                  </button>

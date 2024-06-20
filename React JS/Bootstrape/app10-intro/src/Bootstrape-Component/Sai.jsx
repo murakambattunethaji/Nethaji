@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, {useEffect, useState } from "react";
 
 const Sai = () => {
   const [userDetails, setUserDetails] = useState({
@@ -76,14 +75,19 @@ const Sai = () => {
   const { name, email, investment, dateofjoined, active } = userDetails;
 
   return (
-    <div>
-      <h1>Quick_Contact - Application</h1>
-      <br />
+    <div className="container">
+      <nav className="navbar bg-body-tertiary">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href="#">
+                            Sai form
+                        </a>
+                    </div>
+                </nav>
       <br />
 
       <div className="container ">
         <div className="row ">
-          <div className="col-3 ">
+          <div className="col-12 ">
             <form>
               <div className="mb-3">
                 <input
@@ -165,15 +169,15 @@ const Sai = () => {
               )}
             </form>
           </div>
-          <div className="col-9">
+          <div className="col-12">
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Investment</th>
-                  <th>Date Of Joined</th>
-                  <th>Active</th>
+                  <th>contact number</th>
+                  <th>web link</th>
+                  <th>messages</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -189,7 +193,7 @@ const Sai = () => {
                       <td>{usr.active}</td>
                       <td>
                         <button
-                          className="btn btn-warning"
+                          className="btn btn-primary"
                           onClick={() => {
                             editUser(usr, i);
                           }}
