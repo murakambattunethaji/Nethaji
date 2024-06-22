@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
 import { useEffect } from "react";
+import axios from 'axios'
 import Nethajiform from "./Nethaji.form";
 import Nethajitable from "./Nethaji_table";
 const Nethaji = () => {
@@ -16,7 +16,7 @@ const Nethaji = () => {
     getUsersFromServer()
   },[])
   const createUser = () => {
-    axios.post("", user).then(() => {
+    axios.post("http://localhost:4200/users", user).then(() => {
       console.log("User Added Successfully !!!");
       clearUser();
       getUsersFromServer();
@@ -27,12 +27,12 @@ const Nethaji = () => {
     setIsEdit(true);
   };
   const deleteUser = (usr) => {
-    axios.delete(""+usr.id).then(()=>{
+    axios.delete("http://localhost:4200/users"+usr.id).then(()=>{
       getUsersFromServer();
     })
   };
   const updateUser = () => {
-    axios.put(""+user.id,user).then(()=>{
+    axios.put("http://localhost:4200/users"+user.id,user).then(()=>{
       getUsersFromServer();
       clearUser();
       setIsEdit(false);
@@ -40,12 +40,13 @@ const Nethaji = () => {
   };
   const clearUser = () => {
     setUser({
+      name:"",
       email: "",
       password: "",
     });
   };
   const getUsersFromServer = () => {
-    axios.get("").then(({data})=>{
+    axios.get("http://localhost:4200/users").then(({data})=>{
       setAllUsers(data)
     })
   };

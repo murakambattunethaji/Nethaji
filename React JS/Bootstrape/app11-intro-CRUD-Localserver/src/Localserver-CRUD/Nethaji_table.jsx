@@ -3,12 +3,13 @@ import React from "react";
 const Nethajitable = ({ allUsers,editUser,deleteUser }) => {
   return (
     <div>
-      <table className="table table-success table-striped">
+      <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
+            <th>contact</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -19,6 +20,8 @@ const Nethajitable = ({ allUsers,editUser,deleteUser }) => {
                     <td>{usr.name}</td>
                     <td>{usr.email}</td>
                     <td>{usr.password}</td>
+                    <td>{usr.contact}</td>
+
                     <td>
                         <button className="btn btn-warning" onClick={()=>{editUser(usr)}}>Edit</button>
                     </td>

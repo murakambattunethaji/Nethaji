@@ -44,6 +44,19 @@ const Nethajiform = ({ handleChange, user, createUser, isEdit,updateUser }) => {
             onChange={handleChange}
           />
         </div>
+
+        <div className="mb-3">
+          <label htmlFor="" className="form-label">
+            contact
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            value={user.number}
+            name="contact"
+            onChange={handleChange}
+          />
+        </div>
         {isEdit ? (
           <button
             type="button"
@@ -57,7 +70,6 @@ const Nethajiform = ({ handleChange, user, createUser, isEdit,updateUser }) => {
             type="button"
             className="btn btn-primary"
             onClick={createUser}
-            disabled
           >
             Create User
           </button>

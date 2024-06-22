@@ -1,11 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
 import Nethaji from './Localserver-CRUD/Nethaji';
+import Sai from './Localserver-CRUD/Sai';
 
 function App() {
   return (
     <div>
      <Nethaji/>
+     {/* <Sai/> */}
     </div>
   );
 }
