@@ -1,5 +1,13 @@
 {
-    "nethaji":[],
-    "vijay":[],
-    "saiuser":[]
+  "nethaji": [],
+  "vijay": [],
+  "saiuser": [],
+  "reddy": [
+    {
+      "id": "aeb0",
+      "email": "mnethaji838@gmail.com",
+      "password": "1234567890",
+      "name": "Nethaji m"
+    }
+  ]
 }
