@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Youtube_form = ({handlechange,user}) => {
+const Youtube_form = ({handlechange,user,createUser}) => {
     return (
         <div>
             <br />
@@ -46,7 +46,7 @@ const Youtube_form = ({handlechange,user}) => {
 
 
 
-                <button type="button" className="btn btn-primary">Add user</button>
+                <button type="button" className="btn btn-primary" onClick={createUser}>Add user</button>
 
             </form>
 

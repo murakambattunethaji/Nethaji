@@ -1,13 +1,31 @@
 {
-  "nethaji": [],
+  "nethaji": [
+    {
+      "id": "abc5",
+      "name": "Nethaji",
+      "email": "mnethaji838@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "a5fc",
+      "name": "Nethaji",
+      "email": "mnethaji838@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "a662",
+      "name": "Nethaji",
+      "email": "mnethaji838@gmail.com",
+      "password": "1234567890"
+    },
+    {
+      "id": "bb34",
+      "name": "Nethaji",
+      "email": "mnethaji838@gmail.com",
+      "password": "1234567890"
+    }
+  ],
   "vijay": [],
   "saiuser": [],
-  "reddy": [
-    {
-      "id": "aeb0",
-      "email": "mnethaji838@gmail.com",
-      "password": "1234567890",
-      "name": "Nethaji m"
-    }
-  ]
+  "reddy": []
 }
