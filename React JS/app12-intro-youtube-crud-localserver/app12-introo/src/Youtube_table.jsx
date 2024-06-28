@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Youtube_table = () => {
+const Youtube_table = ({alluser,edituser,deleteUser}) => {
     return (
         <div>
             <br /> <br />
@@ -18,12 +18,15 @@ const Youtube_table = () => {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                   {alluser.map((usr,i)=>{
+                    return <tr key={i}>
+                        <td>{usr.name}</td>
+                        <td>{usr.email}</td>
+                        <td>{usr.password}</td>
+                        <td><button className='btn btn-primary' onClick={()=>{edituser(usr)}}>edit</button></td>
+                        <td><button className='btn btn-danger' onClick={()=>{deleteUser(usr)}}>delete</button></td>
                     </tr>
-
+                   })}
                 </tbody>
 
             </table>
