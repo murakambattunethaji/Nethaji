@@ -7,6 +7,9 @@ import { useState } from 'react';
 import Clickcounter2 from './Render Component 2/Clickcounter2';
 import Hovercounter2 from './Render Component 2/Hovercounter2';
 import Counter2 from './Render Component 2/Counter2';
+import Hovercounters from './Render Component 3/Hovercounters';
+import Clickcounters from './Render Component 3/Clickcounters';
+import Counters from './Render Component 3/Counters';
 
 function App() {
   // const [count, setcount] = useState(0)
@@ -18,11 +21,11 @@ function App() {
 
 
 
-  const [count, setcount] = useState(0)
+  // const [count, setcount] = useState(0)
 
-  const handleincrease = () => {
-    setcount(count + 1)
-  }
+  // const handleincrease = () => {
+  //   setcount(count + 1)
+  // }
 
 
 
@@ -42,11 +45,13 @@ function App() {
 
 
 
-      <Counter2 render={<Clickcounter2 count={count} handleincrease={handleincrease} />} />
+      {/* <Counter2 render={<Clickcounter2 count={count} handleincrease={handleincrease} />} /> */}
 
-      <Counter2 render={<Hovercounter2 count={count} handleincrease={handleincrease} />} />
+      {/* <Counter2 render={<Hovercounter2 count={count} handleincrease={handleincrease} />} /> */}
+{/* <Clickcounters/> */}
+{/* <Hovercounters/> */}
 
-
+<Counters/>
     </div>
   );
 }
