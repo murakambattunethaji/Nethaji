@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = (handlechange,user) => {
+const Form = (handlechange, user) => {
     return (
         <div>
             <br />
@@ -13,18 +13,18 @@ const Form = (handlechange,user) => {
                         <input
                             type="text"
                             className="form-control"
-                            value={ user.fname}
+                            value={user.fname}
                             name='fname'
-                            onChange={ handlechange}
+                            onChange={handlechange}
                         />
                     </div>
                     <div className="col">
                         <label htmlFor="">Last Name</label>
                         <input type="text"
                             className="form-control"
-                            value={user.lname }
+                            value={user.lname}
                             name='lname'
-                            onChange={ handlechange}
+                        onChange={handlechange}
                         />
                     </div>
                 </div>
@@ -33,9 +33,9 @@ const Form = (handlechange,user) => {
                     <label htmlFor="" className="form-label">Date of Birth</label>
                     <input type="date"
                         className="form-control"
-                        value={user.dob }
+                        value={user.dob}
                         name='dob'
-                        onChange={ handlechange}
+                    onChange={ handlechange}
                     />
                 </div>
                 <br />
@@ -44,30 +44,34 @@ const Form = (handlechange,user) => {
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email"
                         className="form-control"
-                        value={user.email }
+                        value={user.email}
                         name='email'
-                        onChange={handlechange }
+                    onChange={handlechange }
                     />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                     <input type="password"
                         className="form-control"
-                        value={user.password }
+                        value={user.password}
                         name='password'
-                        onChange={handlechange }
+                    onChange={handlechange }
                     />
                 </div>
                 <div className="mb-3 form-check">
                     <input type="checkbox"
                         className="form-check-input"
-                        value={user.checked }
+                        value={user.checked}
                         name='checked'
-                        onChange={handlechange }
+                    onChange={handlechange }
                     />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
-                <button className='buttons' type="button" class="btn btn-primary">Submit</button>
+                <button 
+                    className='btn btn-primary'
+                    type="button"
+
+                >Submit</button>
             </form>
         </div>
     )
