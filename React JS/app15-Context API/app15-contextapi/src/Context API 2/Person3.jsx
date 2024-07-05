@@ -1,5 +1,5 @@
 import React from 'react'
-import Person4 from './Person4'
+import Person4 from './person4'
 
 const Person3 = ({message}) => {
   return (
