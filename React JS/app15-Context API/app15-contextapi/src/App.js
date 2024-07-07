@@ -6,9 +6,9 @@ import Person1 from './Context API 2/Person1';
 function App() {
   return (
     <div>
-      {/* <Main/> */}
+      <Main/>
 
-      <Person1/>
+      {/* <Person1/> */}
     </div>
   );
 }

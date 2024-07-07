@@ -9,7 +9,7 @@ const Counters = (props) => {
   }
   return (
     <div>
-{props.render}
+      {props.render}
     </div>
   )
 }
