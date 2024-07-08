@@ -4,11 +4,13 @@ import Details from './SPA-Component/Details';
 import Home from './SPA-Component/Home';
 import Location from './SPA-Component/Location';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Navbar from './SPA-Component/Navbar';
 function App() {
   return (
     <div className="App">
 
       <Router>
+        <Navbar/>
         <Routes>
 
           <Route path='/' element={<Home/>}/>
