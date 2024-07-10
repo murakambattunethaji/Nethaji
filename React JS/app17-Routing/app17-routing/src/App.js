@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Users from './React-Router-DOM/Users';
 import Pagenotefound from './React-Router-DOM/Pagenotefound';
 import Protectedroute from './React-Router-DOM/Protectedroute';
+import Login from './React-Router-DOM/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/users' element={<Protectedroute>
             <Users />
           </Protectedroute>} />
+          <Route path='/login' element={<Login />} />
           <Route path='*' element={<Pagenotefound />} />
 
         </Routes>
