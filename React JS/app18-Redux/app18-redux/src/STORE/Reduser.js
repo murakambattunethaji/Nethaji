@@ -1,20 +1,26 @@
 import { CREATE_USER, DELETE_USER, EDIT_USER, READ_USER } from "./Constant";
 
 const initialstate = {
-    users: []
+    users: ["nethaji", "reddy", "vijay", "dinesh", "sai"]
 }
 
 export const Reduser = (state = initialstate, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case CREATE_USER:
-            break;
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            }
         case READ_USER:
-            break;
+            return state
         case EDIT_USER:
             break;
         case DELETE_USER:
-            break;
-            default :
+           return {
+            ...state,
+            users:[...state.users.filter((user)=> user !== action.payload)],
+           }
+        default:
             return state
     }
 }
