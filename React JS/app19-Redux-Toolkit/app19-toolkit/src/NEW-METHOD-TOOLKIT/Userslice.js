@@ -12,13 +12,13 @@ const Userslice = createSlice({
         readuser: () => { },
 
         updateuser: (state, action) => {
-           const {index, newuser}=action.payload
-           if(index >=0 && index < state.users.length){
-            state.users[index]=newuser
+            const { index, newuser } = action.payload
+            if (index >= 0 && index < state.users.length) {
+                state.users[index] = newuser
 
-           }
+            }
         },
-        
+
         deleteuser: (state, action) => {
             state.users = state.users.filter((usr) => usr !== action.payload)
         }
@@ -27,4 +27,4 @@ const Userslice = createSlice({
 })
 
 export default Userslice.reducer;
-export const { createuser, deleteuser , updateuser } = Userslice.actions
+export const { createuser, deleteuser, updateuser } = Userslice.actions

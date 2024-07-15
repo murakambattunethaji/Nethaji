@@ -37,7 +37,7 @@ const App = () => {
       {index === null ? (
         <button onClick={handlecreateuaer}>create user</button>
       ) : (
-      <button onClick={handleupdate}>update user</button>
+        <button onClick={handleupdate}>update user</button>
 
       )}
       <ul>
