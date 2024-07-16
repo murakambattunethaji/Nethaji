@@ -7,6 +7,7 @@ const App = () => {
   const [index, setindex] = useState(null)
   const users = useSelector((state) => state.userdetails.users)
   const dispatch = useDispatch()
+
   const handlecreateuaer = () => {
     dispatch(createuser(username))
   }
@@ -43,9 +44,11 @@ const App = () => {
       <ul>
         {users.map((usr, i) => (
           <li key={i}> {usr}{""}
+
             <button onClick={() => { hanleedit(usr, i) }}>edit</button>
 
             <button onClick={() => { hanledelete(usr) }}>delete</button>{""}
+            
           </li>))}
       </ul>
     </div>
