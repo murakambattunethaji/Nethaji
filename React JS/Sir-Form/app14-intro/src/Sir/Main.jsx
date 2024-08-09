@@ -22,8 +22,7 @@ const Main = () => {
 
   const clearform = () => { }
 
-  const handlechange = (e) => {
-    console.log(e)
+  const handlechange = () => {
    }
 
   const getserverfromdata = () => { }

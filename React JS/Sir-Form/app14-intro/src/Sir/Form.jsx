@@ -24,7 +24,7 @@ const Form = (handlechange, user) => {
                             className="form-control"
                             value={user.lname}
                             name='lname'
-                        onChange={handlechange}
+                            onChange={handlechange}
                         />
                     </div>
                 </div>
@@ -35,7 +35,7 @@ const Form = (handlechange, user) => {
                         className="form-control"
                         value={user.dob}
                         name='dob'
-                    onChange={ handlechange}
+                        onChange={handlechange}
                     />
                 </div>
                 <br />
@@ -46,7 +46,7 @@ const Form = (handlechange, user) => {
                         className="form-control"
                         value={user.email}
                         name='email'
-                    onChange={handlechange }
+                        onChange={handlechange}
                     />
                 </div>
                 <div className="mb-3">
@@ -55,7 +55,7 @@ const Form = (handlechange, user) => {
                         className="form-control"
                         value={user.password}
                         name='password'
-                    onChange={handlechange }
+                        onChange={handlechange}
                     />
                 </div>
                 <div className="mb-3 form-check">
@@ -63,11 +63,11 @@ const Form = (handlechange, user) => {
                         className="form-check-input"
                         value={user.checked}
                         name='checked'
-                    onChange={handlechange }
+                        onChange={handlechange}
                     />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
-                <button 
+                <button
                     className='btn btn-primary'
                     type="button"
 
