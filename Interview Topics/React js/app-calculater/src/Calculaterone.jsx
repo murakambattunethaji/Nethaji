@@ -15,11 +15,13 @@ function Calculater() {
 
     const handleCalculate = () => {
         try {
-            setResult(eval(input).toString());
+          setResult(eval(input).toString());
         } catch (error) {
-            setResult('Error');
+          setResult('Error');
         }
-    };
+      };
+
+   
 
     return (
         <div className="calculator">
@@ -44,7 +46,10 @@ function Calculater() {
                 <button onClick={() => handleClick('.')}>.</button>
                 <button onClick={handleClear}>C</button>
                 <button onClick={() => handleClick('/')}>/</button>
-                <button onClick={handleCalculate}>=</button>
+
+                <button className="equal-button" onClick={handleCalculate}>=</button>
+
+
             </div>
         </div>
     );

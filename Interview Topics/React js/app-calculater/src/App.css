@@ -2,7 +2,7 @@
   width: 300px;
   margin: 100px auto;
   padding: 20px;
-  border: 2px solid #ddd;
+  border: 2px solid white;
   border-radius: 10px;
   background-color: gray;
 }
@@ -15,8 +15,10 @@
   width: 100%;
   height: 40px;
   text-align: right;
-  font-size: 18px;
-  padding: 5px;
+  font-size: 20px;
+  height: 50px;
+  border-radius: 10px ;
+  border: none;
 }
 
 .result {
@@ -36,15 +38,26 @@ button {
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid white;
+  border-radius: 10px ;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #f0f0f0;
+  background-color: black;
+  color: white;
 }
 
 button:active {
   background-color: #ddd;
+}
+
+.equal-button {
+  grid-column: span 4;
+  background-color: white;
+  color:black;
+}
+
+.equal-button:hover {
+  background-color: #45a049;
 }
