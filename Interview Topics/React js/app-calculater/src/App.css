@@ -1,6 +1,6 @@
 .calculator {
   width: 300px;
-  margin: 100px auto;
+  margin: 100px auto ;
   padding: 20px;
   border: 2px solid white;
   border-radius: 10px;
@@ -23,8 +23,9 @@
 
 .result {
   text-align: right;
-  margin-top: 10px;
-  font-size: 20px;
+  margin-top: 20px;
+  font-size: 30px;
+  margin-bottom: 10px;
   color: white;
 }
 
@@ -61,3 +62,5 @@ button:active {
 .equal-button:hover {
   background-color: #45a049;
 }
+
+

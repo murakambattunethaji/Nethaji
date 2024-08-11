@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
+
+
 function Calculater() {
+    
     const [input, setInput] = useState('');
     const [result, setResult] = useState('');
 
@@ -25,6 +28,7 @@ function Calculater() {
 
     return (
         <div className="calculator">
+            
             <div className="display">
                 <input type="text" value={input} readOnly />
                 <div className="result">{result}</div>
