@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function calculater() {
+function Calculater() {
     const [input, setInput] = useState('');
     const [result, setResult] = useState('');
 
@@ -50,4 +50,4 @@ function calculater() {
     );
 }
 
-export default calculater;
+export default Calculater;
