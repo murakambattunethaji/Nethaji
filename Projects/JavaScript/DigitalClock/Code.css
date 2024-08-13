@@ -7,7 +7,7 @@
 .hello {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(45deg, #08001f, #30197d);
+    background: linear-gradient(70deg, black, blue);
     color: #fff;
     position: relative;
 
@@ -38,8 +38,8 @@
     content: ' ';
     width: 180px;
     height: 180px;
-    background-color: #f41b75;
-    border-radius: 5px;
+    background-color: green;
+    border-radius: px;
     position: absolute;
     left: -50px;
     top: -50px;
@@ -50,7 +50,7 @@
     content: ' ';
     width: 180px;
     height: 180px;
-    background-color: #419aff;
+    background-color: red;
     border-radius: 50%;
     position: absolute;
     right: -30px;
