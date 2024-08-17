@@ -59,7 +59,7 @@ export class User_form_new extends Component {
     render() {
         return <div>
 
-            <h1>welcome to react js</h1>
+            <h1>Welcome to React js</h1>
             <form>
                 <label htmlFor="">fname : </label>
                 <input type="text" name="fname" value={this.state.userdetails.fname} onChange={this.handlechange} />
