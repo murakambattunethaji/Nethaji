@@ -103,7 +103,7 @@
                     console.log("add user successfull")
                 }
             }
-            postdata.open("POST", "http://localhost:3000/users")
+            postdata.open("POST", "http://localhost:4200/vijay")
             postdata.setRequestHeader('content-type', 'application/json')
             postdata.send(JSON.stringify(user));
         }
@@ -118,7 +118,7 @@
                 }
             }
 
-            deletedata.open("DELETE", "http://localhost:3000/users")
+            deletedata.open("DELETE", "http://localhost:4200/vijay")
             deletedata.send();
 
         }
@@ -133,7 +133,7 @@
                         console.log("user added",JSON.parse(getdata.response))
                 }
             }
-            getdata.open("GET","http://localhost:3000/users")
+            getdata.open("GET","http://localhost:4200/vijay")
             getdata.send();
         }
         getuserdata()
@@ -153,7 +153,7 @@
                 }
             }
           
-            putdata.open("PUT","http://localhost:3000/users"+users)
+            putdata.open("PUT","http://localhost:4200/vijay"+users)
         }
 
 

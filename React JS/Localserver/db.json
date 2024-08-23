@@ -25,7 +25,50 @@
       "password": "1234567890"
     }
   ],
-  "vijay": [],
+  "vijay": [
+    {
+      "id": "5e9a",
+      "name": "Nethaji m",
+      "email": "mnethaji838@gmail.com",
+      "password": "sdfghjk"
+    },
+    {
+      "id": "0715",
+      "username": "nethaji",
+      "password": "123456",
+      "email": "mnethaji838@gmail.com"
+    },
+    {
+      "id": "14ed",
+      "username": "nethaji",
+      "password": "qwert",
+      "email": "mnethaji838@gmail.com"
+    },
+    {
+      "id": "67fa",
+      "username": "nethaji",
+      "password": "qwsdf",
+      "email": "zsdfg"
+    },
+    {
+      "id": "14d0",
+      "username": "cvbnm",
+      "password": "sdfg",
+      "email": "mnethaji838@gmail.com"
+    },
+    {
+      "id": "406a",
+      "username": "nethaji",
+      "password": "23456789",
+      "email": "mnethaji838@gmail.com"
+    },
+    {
+      "id": "e3cd",
+      "username": "nethaji",
+      "password": "123456789",
+      "email": "mnethaji838@gmail.com"
+    }
+  ],
   "saiuser": [],
   "reddy": []
 }
