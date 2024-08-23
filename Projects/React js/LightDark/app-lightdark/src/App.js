@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Dark Mode</h1>
+        <h1>React  Mode</h1>
         <button onClick={toggleTheme}>
           Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
         </button>
