@@ -6,7 +6,7 @@ function EmailList() {
   const scriptURL = "https://script.google.com/macros/s/AKfycbzil6gtA73tBDAzmfkru7WkEamYW2ahE84i86OAdcyrx2kN3SqMk38xn028fEgLEJDl/exec";
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  // to be clearify
     const formData = new FormData();
     formData.append("email", email);
 
