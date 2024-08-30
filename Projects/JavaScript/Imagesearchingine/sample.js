@@ -27,8 +27,7 @@ async function searchimage() {
         image.src = result.urls.small
         const imagelink = document.createElement("a")
         imagelink.href = result.links.html
-        imagelink.target = "_blank"
-
+        imagelink.target = "_blank"        
         imagelink.appendChild(image)
         searchresult.appendChild(imagelink)
     })
@@ -36,6 +35,7 @@ async function searchimage() {
 
 }
 searchform.addEventListener("submit", (e) => {
+    console.log(e)
     e.preventDefault()
     page = 1
     searchimage()
