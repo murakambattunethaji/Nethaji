@@ -1,11 +1,32 @@
-import './App.css';
-import React from 'react'
-function App() {
+import React from 'react';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+
+import Home from './Pages/Home';
+import Roomdetails from './Pages/Roomdetails';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home/>
+  },
+  {
+    path: '/room/:id',
+    element :<Roomdetails/>
+  }
+])
+
+const App = () => {
   return (
-    <div>
-      react app
-    </div>
+    <div> 
+    <Header/>
+    <RouterProvider router={router}/>
+    <Footer/>
+  </div>
   );
-}
+  
+};
 
 export default App;
