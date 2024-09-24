@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper-react'
 import 'swiper/css'
 import 'swiper/css/effect-fade';
 
-import { EffectFade, Autoplay } from 'swiper';
+import { EffectFade, Autoplay } from 'swiper-react';
 
 import Img1 from '../Assets/img/heroSlider/1.jpg';
 import Img2 from '../Assets/img/heroSlider/2.jpg';
