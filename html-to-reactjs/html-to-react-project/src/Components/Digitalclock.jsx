@@ -1,47 +1,27 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
-export class DigitalClock extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hours: "00",
-      minutes: "00",
-      seconds: "00",
-    };
-  }
+export class Digitalclock extends Component {
+    constructor() {
+        super()
+    }
+    render() {
+        return (
+            <div>
+                <h1>Digital Clock</h1>
+                <div class="hello">
+                    <div class="container">
+                        <div class="clock">
+                            <span id="hrs">00</span>
+                            <span>:</span>
+                            <span id="min">00</span>
+                            <span>:</span>
+                            <span id="sec">00</span>
+                        </div>
 
-  componentDidMount() {
-    this.timerID = setInterval(() => this.updateTime(), 1000);
-  }
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  updateTime() {
-    const currentTime = new Date();
-
-    this.setState({
-      hours: (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours(),
-      minutes:
-        (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes(),
-      seconds:
-        (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds(),
-    });
-  }
-
-  render() {
-    const { hours, minutes, seconds } = this.state;
-
-    return (
-      <div>
-        <h1>Digital Clock</h1>
-        <h1>
-          {hours}:{minutes}:{seconds}
-        </h1>
-      </div>
-    );
-  }
 }
-
-
