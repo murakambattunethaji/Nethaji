@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { Header } from './Components/Header';
-import { Footer } from './Components/Footer';
+import { DigitalClock } from './Components/Digitalclock';
+import { Calender } from './Components/Calender';
 
 function App() {
   return (
     <div className="App">
-     <Header/>
-     <Footer/>
+     <DigitalClock/>
+     <Calender/>
     </div>
   );
 }

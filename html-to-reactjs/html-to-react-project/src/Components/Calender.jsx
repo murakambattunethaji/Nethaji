@@ -1,7 +1,7 @@
 import { Component } from "react";
 
 
-export class Footer extends Component {
+export class Calender extends Component {
     constructor() {
         super()
     }
