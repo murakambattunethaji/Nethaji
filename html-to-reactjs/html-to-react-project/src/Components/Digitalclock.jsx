@@ -20,8 +20,10 @@ export class Digitalclock extends Component {
 
   updateTime() {
     const currentTime = new Date();
+    
 
     this.setState({
+        
       hours: (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours(),
       minutes:
         (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes(),
@@ -36,6 +38,7 @@ export class Digitalclock extends Component {
     return (
       <div>
         <h1>
+       
           {hours}:{minutes}:{seconds}
         </h1>
       </div>
