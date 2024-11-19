@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { AgCharts } from "ag-charts-react";
 
 
-
 function getData() {
     return [
         { asset: "Stocks", amount: 60000 },
@@ -14,7 +13,7 @@ function getData() {
     ];
 }
 
-const ChartExample = () => {
+const Charttwo = () => {
     const [options, setOptions] = useState({
         data: getData(),
         title: {
@@ -24,19 +23,12 @@ const ChartExample = () => {
             {
                 type: "pie",
                 angleKey: "amount",
-                calloutLabelKey: "asset",
-                sectorLabelKey: "amount",
-                sectorLabel: {
-                    color: "white",
-                    fontWeight: "bold",
-                    formatter: ({ value }) => `$${(value / 1000).toFixed(0)}K`,
-                },
+                legendItemKey: "asset",
             },
         ],
     });
-    return <AgCharts options={options} />;
 
+    return <AgCharts options={options} />;
 };
 
-
-export default ChartExample
+export default Charttwo
