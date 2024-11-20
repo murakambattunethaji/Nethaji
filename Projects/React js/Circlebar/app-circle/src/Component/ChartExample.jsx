@@ -15,6 +15,7 @@ function getData() {
 }
 
 const ChartExample = () => {
+    
     const [options, setOptions] = useState({
         data: getData(),
         title: {
