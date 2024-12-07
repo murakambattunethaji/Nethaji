@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./Formdata.js"></script>
+</head>
+
+<body class="bg-cyan-900 text-white">
+    <div class=" mx-auto p-6 flex">
+        <div class="bg-blue-800 p-4 rounded-lg shadow-lg w-[1000px]">
+            <h1 class="text-2xl font-bold mb-6">Vehicle Registration Form</h1>
+            <form name="registrationForm" onsubmit="return handleSubmit(event)">
+                <!-- Contact Information -->
+                <div class="mb-4">
+                    <label class="block mb-2">Contact Name</label>
+                    <div class="flex space-x-2">
+                        <select name="title" class="w-1/4 p-2 rounded bg-blue-700 text-white">
+                            <option value="">Title</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Ms">Ms</option>
+                            <option value="Mrs">Mrs</option>
+                        </select>
+                        <input type="text" name="firstName" placeholder="First"
+                            class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                        <input type="text" name="lastName" placeholder="Last"
+                            class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Address</label>
+                    <input type="text" name="streetAddress" placeholder="Street Address"
+                        class="w-full p-2 mb-2 rounded bg-blue-700 text-white">
+                    <input type="text" name="city" placeholder="City" class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                </div>
+                <div class="flex space-x-2 mb-4">
+                    <input type="text" name="postalCode" placeholder="Postal Code"
+                        class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                    <select name="country" class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                        <option value="">Country</option>
+                        <option value="INDIA">INDIA</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">UK</option>
+                    </select>
+                </div>
+
+                <!-- Company Information -->
+                <div class="mb-4">
+                    <label class="block mb-2">Company Name</label>
+                    <input type="text" name="companyName" placeholder="Company Name"
+                        class="w-full p-2 rounded bg-blue-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Company Address</label>
+                    <input type="text" name="companyStreetAddress" placeholder="Street Address"
+                        class="w-full p-2 mb-2 rounded bg-blue-700 text-white">
+                    <input type="text" name="companyCity" placeholder="City"
+                        class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                </div>
+                <div class="flex space-x-2 mb-4">
+                    <input type="text" name="companyPostalCode" placeholder="Postal Code"
+                        class="w-1/2 p-2 rounded bg-blue-700 text-white">
+                    <select name="companyCountry" class="w-1/2 p-2 rounded bg-blue-700 text-white">
+
+                        <option value="">Country</option>
+                        <option value="INDIA">INDIA</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">UK</option>
+
+                    </select>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" class="w-full p-2 bg-blue-600 rounded text-white">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table to display data -->
+        <div class="bg-blue-800 p-4 rounded-lg shadow-lg  ml-8 w-[700px]">
+            <h2 class="text-xl font-bold mb-4">Submitted Data</h2>
+            <table class="w-full text-left border-collapse border border-gray-400">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 p-2">Contact Name</th>
+                        <th class="border border-gray-300 p-2">Contact Address</th>
+                        <th class="border border-gray-300 p-2">Company Name</th>
+                        <th class="border border-gray-300 p-2">Company Address</th>
+                        <th class="border border-gray-300 p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let currentEditIndex = -1;
+        const form = document.forms["registrationForm"];
+        const dataTable = document.getElementById("dataTable");
+
+
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const formData = {
+                contactName: `${form["title"].value} ${form["firstName"].value} ${form["lastName"].value}`,
+                contactAddress: `${form["streetAddress"].value}, ${form["city"].value}, ${form["postalCode"].value}, ${form["country"].value}`,
+                companyName: form["companyName"].value,
+                companyAddress: `${form["companyStreetAddress"].value}, ${form["companyCity"].value}, ${form["companyPostalCode"].value}, ${form["companyCountry"].value}`,
+            };
+
+            if (currentEditIndex >= 0) {
+                updateRow(currentEditIndex, formData);
+            } else {
+                appendDataToTable(formData);
+            }
+
+            form.reset();
+            currentEditIndex = -1;
+        }
+
+        function appendDataToTable(data) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="border border-gray-300 p-2">${data.contactName}</td>
+                <td class="border border-gray-300 p-2">${data.contactAddress}</td>
+                <td class="border border-gray-300 p-2">${data.companyName}</td>
+                <td class="border border-gray-300 p-2">${data.companyAddress}</td>
+                <td class="border border-gray-300 p-2">
+                    <button onclick="editRow(this)" class="bg-yellow-500 px-2 py-1 rounded text-black w-16 ml-6">Edit</button>
+                    <button onclick="deleteRow(this)" class="bg-red-500 px-2 py-1 rounded text-white mt-2 ml-6 w-16">Delete</button>
+                </td>
+            `;
+            dataTable.appendChild(row);
+        }
+
+        function editRow(button) {
+            const row = button.parentNode.parentNode;
+            currentEditIndex = Array.from(dataTable.children).indexOf(row);
+
+            const cells = row.children;
+            const contactNameParts = cells[0].innerText.split(" ");
+            const contactAddressParts = cells[1].innerText.split(", ");
+            const companyAddressParts = cells[3].innerText.split(", ");
+
+            form["title"].value = contactNameParts[0];
+            form["firstName"].value = contactNameParts[1];
+            form["lastName"].value = contactNameParts[2];
+            form["streetAddress"].value = contactAddressParts[0];
+            form["city"].value = contactAddressParts[1];
+            form["postalCode"].value = contactAddressParts[2];
+            form["country"].value = contactAddressParts[3];
+            form["companyName"].value = cells[2].innerText;
+            form["companyStreetAddress"].value = companyAddressParts[0];
+            form["companyCity"].value = companyAddressParts[1];
+            form["companyPostalCode"].value = companyAddressParts[2];
+            form["companyCountry"].value = companyAddressParts[3];
+
+
+        }
+
+        function updateRow(index, data) {
+            const row = dataTable.children[index];
+            row.children[0].innerText = data.contactName;
+            row.children[1].innerText = data.contactAddress;
+            row.children[2].innerText = data.companyName;
+            row.children[3].innerText = data.companyAddress;
+        }
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            dataTable.removeChild(row);
+        }
+    </script>
+</body>
+
+</html>
