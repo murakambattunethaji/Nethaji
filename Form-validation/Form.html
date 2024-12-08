@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Registration Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./Formdata.js"></script>
 </head>
 
 <body class="bg-cyan-900 text-white">
-    <div class=" mx-auto p-6 flex">
+    <div class="mx-auto p-6 flex">
         <div class="bg-blue-800 p-4 rounded-lg shadow-lg w-[1000px]">
             <h1 class="text-2xl font-bold mb-6">Vehicle Registration Form</h1>
             <form name="registrationForm" onsubmit="return handleSubmit(event)">
-                <!-- Contact Information -->
                 <div class="mb-4">
                     <label class="block mb-2">Contact Name</label>
                     <div class="flex space-x-2">
@@ -30,6 +28,25 @@
                             class="w-1/2 p-2 rounded bg-blue-700 text-white">
                     </div>
                 </div>
+
+                <div class="mb-4">
+                    <label class="block mb-2">Gender</label>
+                    <div class="flex space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="gender" value="Male" class="text-blue-600">
+                            <span class="ml-2">Male</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="gender" value="Female" class="text-blue-600">
+                            <span class="ml-2">Female</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="gender" value="Other" class="text-blue-600">
+                            <span class="ml-2">Other</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     <label class="block mb-2">Address</label>
                     <input type="text" name="streetAddress" placeholder="Street Address"
@@ -48,7 +65,6 @@
                     </select>
                 </div>
 
-                <!-- Company Information -->
                 <div class="mb-4">
                     <label class="block mb-2">Company Name</label>
                     <input type="text" name="companyName" placeholder="Company Name"
@@ -65,14 +81,26 @@
                     <input type="text" name="companyPostalCode" placeholder="Postal Code"
                         class="w-1/2 p-2 rounded bg-blue-700 text-white">
                     <select name="companyCountry" class="w-1/2 p-2 rounded bg-blue-700 text-white">
-
                         <option value="">Country</option>
                         <option value="INDIA">INDIA</option>
                         <option value="USA">USA</option>
                         <option value="Canada">Canada</option>
                         <option value="UK">UK</option>
-
                     </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block mb-2">Preferences</label>
+                    <div class="flex items-center">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="newsletter" class="text-blue-600">
+                            <span class="ml-2">Subscribe to Newsletter</span>
+                        </label>
+                        <label class="inline-flex items-center ml-6">
+                            <input type="checkbox" name="terms" class="text-blue-600" required>
+                            <span class="ml-2">I agree to the Terms and Conditions</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="mt-6">
@@ -81,8 +109,7 @@
             </form>
         </div>
 
-        <!-- Table to display data -->
-        <div class="bg-blue-800 p-4 rounded-lg shadow-lg  ml-8 w-[700px]">
+        <div class="bg-blue-800 p-4 rounded-lg shadow-lg ml-8 ">
             <h2 class="text-xl font-bold mb-4">Submitted Data</h2>
             <table class="w-full text-left border-collapse border border-gray-400">
                 <thead>
@@ -91,7 +118,11 @@
                         <th class="border border-gray-300 p-2">Contact Address</th>
                         <th class="border border-gray-300 p-2">Company Name</th>
                         <th class="border border-gray-300 p-2">Company Address</th>
+                        <th class="border border-gray-300 p-2">Gender</th>
+                        <th class="border border-gray-300 p-2">Subscribe</th>
+                        <th class="border border-gray-300 p-2"> Terms and Conditions</th>
                         <th class="border border-gray-300 p-2">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody id="dataTable"></tbody>
@@ -99,56 +130,93 @@
         </div>
     </div>
 
-    <script>
-        let currentEditIndex = -1;
-        const form = document.forms["registrationForm"];
-        const dataTable = document.getElementById("dataTable");
+    <!-- <script>
 
+        let currentEditIndex = -1; // present edit index track of index
+        const form = document.forms["registrationForm"]; // registrationForm is accessed
+        const dataTable = document.getElementById("dataTable"); // table is accessed
 
+        window.onload = function () {
+            fetch('http://localhost:3000/registrations') // page load time local server is data fetched
+                // fetch is server http get request send 
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        appendDataToTable(item);
+                    });
+                    // server comes in data  json fomate changed
+                })
+                .catch(error => console.error('Error fetching data:', error));
+            //data print is risk and erros come in console show
+        };
 
         function handleSubmit(event) {
-            event.preventDefault();
+            event.preventDefault(); // form sumit handled . page relode turned off
 
             const formData = {
                 contactName: `${form["title"].value} ${form["firstName"].value} ${form["lastName"].value}`,
                 contactAddress: `${form["streetAddress"].value}, ${form["city"].value}, ${form["postalCode"].value}, ${form["country"].value}`,
                 companyName: form["companyName"].value,
                 companyAddress: `${form["companyStreetAddress"].value}, ${form["companyCity"].value}, ${form["companyPostalCode"].value}, ${form["companyCountry"].value}`,
+                gender: form["gender"] ? form["gender"].value : '',
+                newsletter: form["newsletter"].checked,
+                terms: form["terms"].checked
             };
 
             if (currentEditIndex >= 0) {
-                updateRow(currentEditIndex, formData);
+                updateRow(currentEditIndex, formData); // user edited or new row created
             } else {
                 appendDataToTable(formData);
+
+                fetch('http://localhost:3000/registrations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Data added:', data);
+                    })
+                    .catch(error => console.error('Error adding data:', error));
+
+                // new data post request to db.json
             }
 
             form.reset();
             currentEditIndex = -1;
+            // form in clear for reset
         }
 
         function appendDataToTable(data) {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td class="border border-gray-300 p-2">${data.contactName}</td>
-                <td class="border border-gray-300 p-2">${data.contactAddress}</td>
-                <td class="border border-gray-300 p-2">${data.companyName}</td>
-                <td class="border border-gray-300 p-2">${data.companyAddress}</td>
-                <td class="border border-gray-300 p-2">
-                    <button onclick="editRow(this)" class="bg-yellow-500 px-2 py-1 rounded text-black w-16 ml-6">Edit</button>
-                    <button onclick="deleteRow(this)" class="bg-red-500 px-2 py-1 rounded text-white mt-2 ml-6 w-16">Delete</button>
-                </td>
-            `;
+        <td class="border border-gray-300 p-2">${data.contactName}</td>
+        <td class="border border-gray-300 p-2">${data.contactAddress}</td>
+        <td class="border border-gray-300 p-2">${data.companyName}</td>
+        <td class="border border-gray-300 p-2">${data.companyAddress}</td>
+        <td class="border border-gray-300 p-2">${data.gender}</td>
+        <td class="border border-gray-300 p-2">${data.newsletter ? 'Subscribed' : 'Not Subscribed'}</td>
+        <td class="border border-gray-300 p-2">${data.terms ? 'Agreed' : 'Not Agreed'}</td>
+        <td class="border border-gray-300 p-2">
+            <button onclick="editRow(this)" class="bg-yellow-500 px-2 py-1 rounded text-black w-16 ml-6">Edit</button>
+            <button onclick="deleteRow(this)" class="bg-red-500 px-2 py-1 rounded text-white mt-2 ml-6 w-16">Delete</button>
+        </td>
+    `;
             dataTable.appendChild(row);
         }
 
         function editRow(button) {
             const row = button.parentNode.parentNode;
             currentEditIndex = Array.from(dataTable.children).indexOf(row);
+            // edited row that index set 
 
             const cells = row.children;
             const contactNameParts = cells[0].innerText.split(" ");
             const contactAddressParts = cells[1].innerText.split(", ");
             const companyAddressParts = cells[3].innerText.split(", ");
+            // cells data sapparate  forn in pre filled
 
             form["title"].value = contactNameParts[0];
             form["firstName"].value = contactNameParts[1];
@@ -162,8 +230,10 @@
             form["companyCity"].value = companyAddressParts[1];
             form["companyPostalCode"].value = companyAddressParts[2];
             form["companyCountry"].value = companyAddressParts[3];
-
-
+            // form feeld is fullfilled
+            form["gender"].value = cells[4].innerText;
+            form["newsletter"].checked = cells[5].innerText === 'Subscribed';
+            form["terms"].checked = cells[6].innerText === 'Agreed';
         }
 
         function updateRow(index, data) {
@@ -172,12 +242,34 @@
             row.children[1].innerText = data.contactAddress;
             row.children[2].innerText = data.companyName;
             row.children[3].innerText = data.companyAddress;
+            row.children[4].innerText = data.gender;
+            row.children[5].innerText = data.newsletter ? 'Subscribed' : 'Not Subscribed';
+            row.children[6].innerText = data.terms ? 'Agreed' : 'Not Agreed';
         }
+        // table cells edited and update 
 
         function deleteRow(button) {
             const row = button.parentNode.parentNode;
             dataTable.removeChild(row);
+            // table row deleted
+
+            const contactName = row.children[0].innerText;
+            fetch(`http://localhost:3000/registrations?contactName=${contactName}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Data deleted:', data);
+                })
+                .catch(error => console.error('Error deleting data:', error));
+
+                // delete request from server data deleted
         }
+
+    </script> -->
+
+    <script>
+        
     </script>
 </body>
 
