@@ -27,8 +27,8 @@
                             <option value="dr">Dr.</option>
                         </select>
 
-                        <input type="text" name="first-name" placeholder="First" id="first-name">
-                        <input type="text" name="last-name" placeholder="Last" id="last-name">
+                        <input type="text" name="first-name" placeholder="First" id="firstname">
+                        <input type="text" name="last-name" placeholder="Last" id="lastname">
 
                     </div>
                 </div>
@@ -106,106 +106,52 @@
     </div>
 
 
+
     <script>
-
-        // var users = []
-        // function creatuser() {
-        //     var person = {
-        //         title: document.getElementById("title").value,
-        //         fname: document.getElementById("first-name").value,
-        //         lname: document.getElementById("last-name").value,
-        //         streetaddress: document.getElementById("Street-Address").value,
-        //     }
-
-        //     users.push(person)
-        //     displayuser()
-        //     clearuser()
-        // }
-
-        // function clearuser() {
-        //     title: document.getElementById("title").value = ""
-        //     fname: document.getElementById("first-name").value = ""
-        //     lname: document.getElementById("last-name").value = ""
-        //     streetaddress: document.getElementById("Street-Address").value = ""
-        // }
-
-        // function edituser() {
-
-        // }
-
-
-        // function displayuser() {
-        //     document.querySelector("tbody").innerHTML = ""
-
-        //     for(i=0;i<users.length;i++){
-        //         var myTr = document.createElement("tr")
-        //         var userObj = users[i];
-        //     for(a in userObj){
-        //         var myTd = document.createElement("td");
-        //         myTd.innerHTML = userObj[a]
-        //         myTr.appendChild(myTd)
-        //     }
-        //         document.querySelector("tbody").appendChild(myTr)
-        //     }
-
-
-        //     // document.querySelector("tbody").innerHTML = ""
-
-        //     // users.map((userObj, i) => {
-        //     //     var myTr = document.createElement("tr")  
-        //     //     for (a in userObj) {
-        //     //         var myTd = document.createElement("td");
-        //     //         myTd.innerHTML = userObj[a]
-        //     //         myTr.appendChild(myTd)
-        //     //     }
-        //     //     var editTd = document.createElement("td")
-        //     //     var deleteTd = document.createElement("td")
-
-        //     //     var editbtn = document.createElement('button');
-        //     //     editbtn.setAttribute("onclick", "edituser(" + i + ")")
-        //     //     var deleteBtn = document.createElement('button');
-        //     //     editTd.appendChild(editbtn);
-        //     //     deleteTd.appendChild(deleteBtn)
-        //     //     editbtn.innerHTML = "Edit User";
-        //     //     deleteBtn.innerHTML = "Delete User"
-        //     //     deleteBtn.setAttribute('onclick', 'deleteUser(' + i + ')')
-        //     //     myTr.appendChild(editTd)
-        //     //     myTr.appendChild(deleteTd)
-        //     //     document.querySelector("tbody").appendChild(myTr)
-        //     // })
-        // }
-
-
-
         var users = []
 
         function createuser() {
             var person = {
                 title: document.getElementById("title").value,
-                fname: document.getElementById("first-name").value,
-                lname: document.getElementById("last-name").value,
-            }
+                fname: document.getElementById("firstname").value,
+                lname: document.getElementById("lastname").value,
 
+            }
             users.push(person)
-            displayuser()
+            console.log(person)
+            displayUsers()
         }
 
-        function displayuser() {
+        function displayUsers() {
             document.querySelector("tbody").innerHTML = ""
+            users.map((userobj,i) => {
+                var myTr = document.createElement("tr")
+                for (a in userobj) {
+                    var myTd = document.createElement("td")
+                    myTd.innerHTML = userobj[a]
+                    myTr.appendChild(myTd)
+                }
 
-            for (i = 0; i < users.length; i++) {
-                var myTr = document.createElement('tr')
-                var userObj = users[i]
-            }
-            for (a in userObj) {
-                var myTd = document.createElement('td')
-                myTd.innerHTML=userObj[a]
-                myTr.appendChild(myTd)
-            }
-            document.querySelector("tbody").appendChild(myTr)
+                var deleteTd = document.createElement("td")
+                var deleteBtn = document.createElement("button")
+                deleteTd.appendChild(deleteBtn)
+                deleteBtn.setAttribute('onclick', 'deleteUser(' + i + ')')
+                deleteBtn.innerHTML = 'Delete'
+                myTr.appendChild(deleteTd)
+
+                document.querySelector("tbody").appendChild(myTr)
+            })
         }
 
+        function deleteUser(i) {
+            users.splice(i, 1)
+            displayUsers()
+        }
     </script>
+
+
+
+
 </body>
 
 </html>

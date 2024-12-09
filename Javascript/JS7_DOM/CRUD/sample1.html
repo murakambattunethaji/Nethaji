@@ -74,32 +74,29 @@
           myTr.appendChild(myTd)
         }
         var editTd = document.createElement("td")
+
         var deleteTd = document.createElement("td")
 
         var editbtn = document.createElement('button');
         editbtn.setAttribute("onclick", "edituser(" + i + ")")
+
         var deleteBtn = document.createElement('button');
+
         editTd.appendChild(editbtn);
+
         deleteTd.appendChild(deleteBtn)
+
         editbtn.innerHTML = "Edit User";
+
         deleteBtn.innerHTML = "Delete User"
         deleteBtn.setAttribute('onclick', 'deleteUser(' + i + ')')
+
         myTr.appendChild(editTd)
+
         myTr.appendChild(deleteTd)
+
         document.querySelector("tbody").appendChild(myTr)
       })
-
-      // for(i=0;i<users.length;i++){
-      //     var myTr = document.createElement("tr")
-      //     var userObj = users[i];
-      // for(a in userObj){
-      //     var myTd = document.createElement("td");
-      //     myTd.innerHTML = userObj[a]
-      //     myTr.appendChild(myTd)
-      // }
-      //     document.querySelector("tbody").appendChild(myTr)
-      // }
-
     }
 
     displayUsers()
@@ -108,11 +105,11 @@
     function deleteUser(i) {
       console.log("deleteUser called !!", i)
       users.splice(i, 1);
-      displayUsers()
     }
+
     var gIndex = null;
 
-    
+
     function edituser(i) {
       gIndex = i;
       var userToEdit = users[i]
