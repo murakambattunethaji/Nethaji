@@ -1,14 +1,5 @@
 {
   "registrations": [
-    {
-      "id": "f469",
-      "contactName": "Mr nethaji m",
-      "contactAddress": "USA, bangalore, 517001, INDIA",
-      "companyName": "flipkart",
-      "companyAddress": "Canada, bangalore, 517001, INDIA",
-      "gender": "Male",
-      "newsletter": true,
-      "terms": true
-    }
+    
   ]
 }
