@@ -23,7 +23,7 @@
 
         .booked {
             color: red;
-            cursor: not-allowed;        
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -45,38 +45,23 @@
     <p id="message"></p>
 
     <script>
-
-        /* 
-
-        1. An event listener is added to the #main container using addEventListener. It listens for click events.
-        2. event.target identifies the specific element clicked.
-        3. event.currentTarget refers to the #main container.
-        4. The booked class is added using classList.add("booked").
-
-        
-        */
-
-
-        // Add event listener to the main div
-
-        document.getElementById("main").addEventListener("click", function (event) {
-            // Check if the clicked element is a direct child of #main
-
+        document.getElementById("main").addEventListener("click", function (event) {   
+            //event.currentTarget to be explain
             if (event.target !== event.currentTarget && event.target.tagName === "DIV") {
-                var clickedBox = event.target;
+                var clickedBox = event.target
 
-                // If already booked, show a message
                 if (clickedBox.classList.contains("booked")) {
-                    document.getElementById("message").textContent = "This ticket is already booked!";
+                    document.getElementById("message").textContent = "this ticket is already booked"
+                }
+                else {
+                    clickedBox.classList.add("booked")
+                    document.getElementById("message").textContent = "ticket" + clickedBox.textContent + "is successfully booked"
                 }
 
-                else {
-                    // Mark the box as booked
-                    clickedBox.classList.add("booked");
-                    document.getElementById("message").textContent = "Ticket " + clickedBox.textContent + " is successfully booked!";
-                }
             }
-        });
+
+        })
+
     </script>
 </body>
 

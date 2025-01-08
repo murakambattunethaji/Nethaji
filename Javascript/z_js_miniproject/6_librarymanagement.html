@@ -1,0 +1,222 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .form-section {
+            margin: 20px 0;
+        }
+
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .book-lists {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .book-list {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .book-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .book-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .book-list li span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Library Management System</h1>
+
+        <div class="form-section">
+            <h2>Add a New Book</h2>
+            <input type="text" id="title" placeholder="Book Title">
+            <input type="text" id="author" placeholder="Author Name">
+            <button id="addBookBtn">Add Book</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Lend a Book</h2>
+            <input type="text" id="lendTitle" placeholder="Book Title">
+            <button id="lendBookBtn">Lend Book</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Return a Book</h2>
+            <input type="text" id="returnTitle" placeholder="Book Title">
+            <button id="returnBookBtn">Return Book</button>
+        </div>
+
+        <div class="book-lists">
+            <div class="book-list">
+                <h2>Available Books</h2>
+                <ul id="availableBooks"></ul>
+            </div>
+            <div class="book-list">
+                <h2>Lent Out Books</h2>
+                <ul id="lentBooks"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Library Constructor
+        function Library() {
+            this.books = [];
+        }
+
+        // Add a new book
+        Library.prototype.addBook = function (title, author) {
+            if (!title || !author) {
+                alert("Both title and author are required!");
+                return;
+            }
+
+            this.books.push({ title, author, isAvailable: true });
+            alert(Book "${title}" by ${ author } added successfully.);
+            this.updateBookLists();
+        };
+
+        // Lend a book
+        Library.prototype.lendBook = function (title) {
+            const book = this.books.find((b) => b.title === title);
+
+            if (!book) {
+                alert(Book "${title}" not found.);
+                return;
+            }
+
+            if (!book.isAvailable) {
+                alert(Book "${title}" is already lent out.);
+                return;
+            }
+
+            book.isAvailable = false;
+            alert(Book "${title}" has been lent out.);
+            this.updateBookLists();
+        };
+
+        // Return a book
+        Library.prototype.returnBook = function (title) {
+            const book = this.books.find((b) => b.title === title);
+
+            if (!book) {
+                alert(Book "${title}" not found.);
+                return;
+            }
+
+            if (book.isAvailable) {
+                alert(Book "${title}" was not lent out.);
+                return;
+            }
+
+            book.isAvailable = true;
+            alert(Book "${title}" has been returned.);
+            this.updateBookLists();
+        };
+
+        // Update book lists in the DOM
+        Library.prototype.updateBookLists = function () {
+            const availableBooks = document.getElementById("availableBooks");
+            const lentBooks = document.getElementById("lentBooks");
+            availableBooks.innerHTML = "";
+            lentBooks.innerHTML = "";
+
+            this.books.forEach((book) => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+          <span>${book.title}</span><br>
+          Author: ${book.author}
+        `;
+
+                if (book.isAvailable) {
+                    availableBooks.appendChild(li);
+                } else {
+                    lentBooks.appendChild(li);
+                }
+            });
+        };
+
+        // Initialize library
+        const myLibrary = new Library();
+
+        // Event listeners
+        document.getElementById("addBookBtn").addEventListener("click", () => {
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            myLibrary.addBook(title, author);
+        });
+
+        document.getElementById("lendBookBtn").addEventListener("click", () => {
+            const title = document.getElementById("lendTitle").value;
+            myLibrary.lendBook(title);
+        });
+
+        document.getElementById("returnBookBtn").addEventListener("click", () => {
+            const title = document.getElementById("returnTitle").value;
+            myLibrary.returnBook(title);
+        });
+    </script>
+</body>
+
+</html> -->

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul style="background-color: red;">
+        <li class="abc">item1</li>
+        <li class="xyz">item2</li>
+        <li>item3</li>
+        <li>item4</li>
+    </ul>
+
+    <script>
+        document.querySelector("ul").addEventListener("click",function(e){
+           console.log(event.target.classList)
+        })
+    </script>
+</body>
+</html>
