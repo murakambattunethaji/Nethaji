@@ -94,11 +94,11 @@
 
         let content = "<strong>" +user.name+ "</strong> ("+user.role+")<br> Email:" +user.email; ;
         listItem.innerHTML = content;
-        userList.appendChild(listItem);  // need to explain
+        userList.appendChild(listItem);  
       }
     }
 
-    document.getElementById("userForm").addEventListener("submit", (e)=>{  // need to explain
+    document.getElementById("userForm").addEventListener("submit", (e)=>{  
       e.preventDefault();
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
