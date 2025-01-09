@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="textinput" placeholder="Reserved String">
+    <br><br>
+    <button type="button" onclick="reserveddata()">submit</button>
+    <br> <br>
+    <p id="message"></p>
+
+
+    <script>
+        function reserveddata() {
+            // Get the input value
+            const inputText = document.getElementById("textinput").value;
+
+            // Reverse the string
+            let reversedText = "";
+            for (let i = inputText.length - 1; i >= 0; i--) {
+                reversedText += inputText[i];
+            }
+
+            // Display the reversed string in the paragraph element
+            document.getElementById("message").innerText = "Reversed String: " + reversedText;
+        }
+    </script>
+
+</body>
+
+</html>
