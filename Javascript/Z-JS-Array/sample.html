@@ -1,0 +1,51 @@
+If you want to achieve similar functionality (showing different content on the same page) using only HTML, you can use the <a> tag with fragment identifiers (id attributes) to jump to specific parts of the page. Here’s an example:
+
+    Example: Only HTML Solution
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Anchor Tag Example</title>
+      <style>
+        #content > div {
+          display: none;
+        }
+        #section1:target,
+        #section2:target,
+        #section3:target {
+          display: block;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Anchor Tag HTML Only Example</h1>
+      
+      <!-- Links -->
+      <nav>
+        <a href="#section1">Show Section 1</a> |
+        <a href="#section2">Show Section 2</a> |
+        <a href="#section3">Show Section 3</a>
+      </nav>
+    
+      <!-- Content Area -->
+      <div id="content">
+        <div id="section1">
+          <h2>Section 1</h2>
+          <p>This is the content for Section 1.</p>
+        </div>
+        <div id="section2">
+          <h2>Section 2</h2>
+          <p>This is the content for Section 2.</p>
+        </div>
+        <div id="section3">
+          <h2>Section 3</h2>
+          <p>This is the content for Section 3.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+    
+ 
+    
