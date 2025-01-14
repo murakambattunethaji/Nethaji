@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input,
+        select,
+        button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .user-list {
+            margin-top: 20px;
+        }
+
+        .user-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .role-admin {
+            color: #d9534f;
+        }
+
+        .role-subscriber {
+            color: #5cb85c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>User Management System</h1>
+        <form id="userForm">
+            <input type="text" id="name" placeholder="Name" required />
+            <input type="email" id="email" placeholder="Email" required />
+            <select id="role">
+                <option value="Subscriber">Subscriber</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <button type="submit">Add User</button>
+        </form>
+        <div class="user-list" id="userList"></div>
+    </div>
+
+    <script>
+        let users = []; 
+
+        function renderUsers() {
+            var userList = document.getElementById("userList");
+            userList.innerHTML = "";
+
+            users.forEach(function (user) {
+                var userItem = document.createElement("div");
+                userItem.className = "user-item";
+
+                var userContent = document.createTextNode(user.name + " (" + user.role + ") " + user.email);
+                userItem.appendChild(userContent);
+
+                var deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function () {
+                    deleteUser(user.email);
+                };
+
+                userItem.appendChild(document.createElement("br"));
+                userItem.appendChild(deleteButton);
+
+                userList.appendChild(userItem);
+            });
+        }
+
+        document.getElementById("userForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var role = document.getElementById("role").value;
+
+            users.push({ name: name, email: email, role: role });
+            renderUsers();
+
+            e.target.reset();
+        });
+
+        function findUser(email) {
+            return users.find(function (user) {
+                return user.email === email;
+            });
+        }
+
+        function updateUser(email, updates) {
+            users.forEach(function (user) {
+                if (user.email === email) {
+                    for (var key in updates) {
+                        user[key] = updates[key];
+                    }
+                }
+            });
+            renderUsers();
+        }
+
+        function deleteUser(email) {
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                users = users.filter(function (user) {
+                    return user.email !== email;
+                });
+                renderUsers();
+            }
+        }
+
+        function validateEmails() {
+            return users.every(function (user) {
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(user.email);
+            });
+        }
+
+        function sortUsers() {
+            users.sort(function (a, b) {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            });
+            renderUsers();
+        }
+
+        function checkRoleAccess(email, action) {
+            var user = findUser(email);
+            if (user) {
+                if (user.role === "Admin") {
+                    alert("Admin access granted for " + action);
+                } else {
+                    alert("Access denied for " + action);
+                }
+            } else {
+                alert("User not found");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,51 +1,99 @@
-If you want to achieve similar functionality (showing different content on the same page) using only HTML, you can use the <a> tag with fragment identifiers (id attributes) to jump to specific parts of the page. Here’s an example:
+<!DOCTYPE html>
+<html lang="en">
 
-    Example: Only HTML Solution
-    
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Anchor Tag Example</title>
-      <style>
-        #content > div {
-          display: none;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        #section1:target,
-        #section2:target,
-        #section3:target {
-          display: block;
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
         }
-      </style>
-    </head>
-    <body>
-      <h1>Anchor Tag HTML Only Example</h1>
-      
-      <!-- Links -->
-      <nav>
-        <a href="#section1">Show Section 1</a> |
-        <a href="#section2">Show Section 2</a> |
-        <a href="#section3">Show Section 3</a>
-      </nav>
-    
-      <!-- Content Area -->
-      <div id="content">
-        <div id="section1">
-          <h2>Section 1</h2>
-          <p>This is the content for Section 1.</p>
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #seating {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #333;
+            cursor: pointer;
+        }
+
+        .seat.regular {
+            background-color: lightgreen;
+        }
+
+        .seat.VIP {
+            background-color: #ffd700;
+        }
+
+        .seat.booked {
+            background-color: red;
+            cursor: not-allowed;
+        }
+
+        .controls button,
+        .actions button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .controls button:hover,
+        .actions button:hover {
+            background-color: #555;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: calc(100% - 20px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Movie Ticket Booking System</h1>
+        <div id="seating"></div>
+        <div class="controls">
+            <button onclick="addSeat('regular')">Add Regular Seat</button>
+            <button onclick="addSeat('VIP')">Add VIP Seat</button>
         </div>
-        <div id="section2">
-          <h2>Section 2</h2>
-          <p>This is the content for Section 2.</p>
+        <div class="actions">
+            <input id="seat-id" placeholder="Enter Seat ID">
+            <button onclick="bookSeat()">Book Seat</button>
+            <button onclick="cancelSeat()">Cancel Booking</button>
         </div>
-        <div id="section3">
-          <h2>Section 3</h2>
-          <p>This is the content for Section 3.</p>
-        </div>
-      </div>
-    </body>
-    </html>
+    </div>
     
- 
-    
+    <script>
+        var seats=[]
+    </script>
+</body>
+
+</html>
