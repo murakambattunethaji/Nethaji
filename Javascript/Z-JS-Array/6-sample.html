@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input,
+        button,
+        select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li.borrowed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        li.available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        button.action {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Library Management System</h1>
+        <div>
+            <input type="text" id="bookTitle" placeholder="Book Title">
+            <input type="text" id="bookAuthor" placeholder="Book Author">
+            <button onclick="addBook()">Add Book</button>
+        </div>
+        <h3>All Books</h3>
+        <ul id="bookList"></ul>
+        <h3>Available Books</h3>
+        <ul id="availableBookList"></ul>
+    </div>
+
+
+    <script>
+        var books=[]
+
+        
+    </script>
+</body>
+
+</html>

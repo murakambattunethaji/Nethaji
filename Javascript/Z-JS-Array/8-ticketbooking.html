@@ -84,6 +84,7 @@
         <div class="controls">
             <button onclick="addSeat('regular')">Add Regular Seat</button>
             <button onclick="addSeat('VIP')">Add VIP Seat</button>
+            <button onclick="sortSeats()">sort seats by type</button>
         </div>
         <div class="actions">
             <input id="seat-id" placeholder="Enter Seat ID">
@@ -91,7 +92,7 @@
             <button onclick="cancelSeat()">Cancel Booking</button>
         </div>
     </div>
-    
+
     <script>
 
         var seats = [];
@@ -104,7 +105,7 @@
                 seatDiv.className = 'seat ' + seat.type + (seat.booked ? ' booked' : '');
                 seatDiv.innerHTML = seat.id;
                 seating.appendChild(seatDiv);
-                
+
             });
         }
 
@@ -140,6 +141,12 @@
             } else {
                 alert('Seat not booked yet!');
             }
+        }
+
+        function sortSeats() {
+            seats.sort((a, b) => (a.type > b.type ? 1 : -1))
+            renderSeats();
+
         }
     </script>
 </body>
