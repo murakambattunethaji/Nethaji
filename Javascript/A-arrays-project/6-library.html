@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .book-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .book-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-title {
+            font-weight: bold;
+        }
+
+        .book-status {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn-borrow {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-borrow:hover {
+            background-color: #218838;
+        }
+
+        .btn-return {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-return:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <h1>Library Management System</h1>
+
+            <!-- Add Book Form -->
+            <div class="form-container">
+                <form id="bookForm">
+                    <input type="text" id="bookTitle" placeholder="Enter book title" required />
+                    <input type="text" id="bookAuthor" placeholder="Enter author name" required />
+                    <button type="submit" id="bookSubmitButton" class="btn-submit">
+                        Add Book
+                    </button>
+                </form>
+            </div>
+
+            <!-- Book List Section -->
+            <div id="bookList" class="book-list">
+                <!-- Dynamic Book List Will Be Rendered Here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const libraryManagement = {
+            books: [],
+
+            addBook(title, author) {
+                const newBook = {
+                    id: Date.now(),
+                    title,
+                    author,
+                    isAvailable: true,
+                };
+
+                this.books.push(newBook);
+                this.renderBooks();
+                this.resetForm();
+            },
+
+            borrowBook(bookId) {
+                const book = this.books.find(book => book.id === bookId);
+                if (book && book.isAvailable) {
+                    book.isAvailable = false;
+                    this.renderBooks();
+                } else {
+                    alert("This book is currently unavailable!");
+                }
+            },
+
+            returnBook(bookId) {
+                const book = this.books.find(book => book.id === bookId);
+                if (book && !book.isAvailable) {
+                    book.isAvailable = true;
+                    this.renderBooks();
+                } else {
+                    alert("This book is  not currently borrowed!");
+                }
+            },
+
+            filterAvailableBooks() {
+                return this.books.filter(book => book.isAvailable);
+            },
+
+            renderBooks() {
+                const bookList = document.getElementById("bookList");
+                bookList.innerHTML = "";
+
+                this.books.forEach(book => {
+                    const bookDiv = document.createElement("div");
+                    bookDiv.className = "book-card";
+
+                    const titleParagraph = document.createElement("p");
+                    titleParagraph.className = "book-title";
+                    //   titleParagraph.textContent = ${book.title} by ${book.author};
+
+                    const statusParagraph = document.createElement("p");
+                    statusParagraph.className = "book-status";
+                    statusParagraph.textContent = book.isAvailable ? "Available" : "Borrowed";
+
+                    const actionButton = document.createElement("button");
+                    if (book.isAvailable) {
+                        actionButton.className = "btn-borrow";
+                        actionButton.textContent = "Borrow";
+                        actionButton.onclick = () => libraryManagement.borrowBook(book.id);
+                    } else {
+                        actionButton.className = "btn-return";
+                        actionButton.textContent = "Return";
+                        actionButton.onclick = () => libraryManagement.returnBook(book.id);
+                    }
+
+                    const buttonContainer = document.createElement("div");
+                    buttonContainer.appendChild(actionButton);
+
+                    bookDiv.appendChild(titleParagraph);
+                    bookDiv.appendChild(statusParagraph);
+                    bookDiv.appendChild(buttonContainer);
+
+                    bookList.appendChild(bookDiv);
+                })
+            },
+
+            resetForm() {
+                document.getElementById("bookTitle").value = "";
+                document.getElementById("bookAuthor").value = "";
+            }
+        }
+
+        document.getElementById("bookForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById("bookTitle").value;
+            const author = document.getElementById("bookAuthor").value;
+
+            libraryManagement.addBook(title, author);
+        })
+    </script>
+</body>
+
+</html>
