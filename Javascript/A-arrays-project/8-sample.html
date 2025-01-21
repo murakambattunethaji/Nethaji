@@ -59,51 +59,36 @@
     </div>
 
     <script>
-        var movieBookingSystem = {
+        const movieBookingSystem = {
             seats: [],
 
-            initializeseats(rows, cols) {
+            addseats(rows, cols) {
                 this.seats = []
-                var rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                const rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
                 for (var i = 0; i < rows; i++) {
-                    for (var j = 0; j <= cols; j++) {
+                    for (j = 1; j <= cols; j++) {
                         this.seats.push({
-                            number: `${rowLetters[i]}${j}`,
-                            isbooked: false,
-                        });
+                            numbers: ` ${rowLetters[i]}${j}`,
+                            isbooked: false
+                        })
                     }
                 }
-                this.renderseats();
+                this.renderseats()
+
             },
+
             renderseats() {
-                var seatArrangement = document.getElementById("seatArrangement")
-                seatArrangement.innerHTML = ''
+                var seatArrangement =document.getElementById("seatArrangement")
+                seatArrangement.innerHTML=""
 
-                this.seats.forEach(seat => {
-                    var seatDiv = document.createElement('div')
-                    seatDiv.className = `seat ${seat.isbooked ? "seat-booked" : "seat-available"}`;
-                    seatDiv.textContent = seat.number
-
-                    seatDiv.onclick = () => {
-                        if (!seat.isbooked) {
-                            var confirmBooking = confirm(`book seat ${seat.number}?`)
-                            if (confirmBooking) {
-                                seat.isbooked = true
-                                this.renderseats()
-                            }
-                            else {
-                                alert(`seat ${seat.number} is already booked.`)
-                            }
-                        }
-                    }
-                    seatArrangement.appendChild(seatDiv)
-                })
+                this
             }
+
+
         }
 
-        movieBookingSystem.initializeseats(5, 10)
-
-
+        movieBookingSystem.addseats(5, 10)
     </script>
 </body>
 
