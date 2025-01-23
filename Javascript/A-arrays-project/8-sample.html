@@ -68,32 +68,32 @@
                 for (let i = 0; i < rows; i++) {
                     for (let j = 1; j <= cols; j++) {
                         this.seats.push({
-                            number: rowLetters[i] + j,
-                            isbooked: false
+                            numbers: rowLetters[i] + j,
+                            isbooking: false
                         })
                     }
                 }
                 this.renderseats()
             },
 
-            renderseats() {
+            renderseats(){
                 var seatArrangement = document.getElementById("seatArrangement")
-                seatArrangement.innerHTML = ""
+                seatArrangement.innerHTML=""
 
-                this.seats.forEach(function (seat) {
+                this.seats.forEach(function(seat){
                     var seatDiv = document.createElement("div")
-                    seatDiv.className = seat.isbooked ? "seat-booked " : "seat-available"
-                    seatDiv.innerHTML = seat.number
+                    seatDiv.className=seat.isbooking ? "seat-booked":"seat-available"
+                    seatDiv.innerHTML=seat.numbers
 
-                    seatDiv.onclick = () => {
-                        if (!seat.isbooked) {
-                            if (confirm("book seat " + seat.number)) {
-                                seat.isbooked = true
+                    seatDiv.onclick=()=>{
+                        if(!seat.isbooking){
+                            if(confirm("seat"+seat.numbers+"booked")){
+                                seat.isbooking=true
                                 movieBookingSystem.renderseats()
                             }
                         }
-                        else {
-                            alert("seat" + seat.number + "is already booked")
+                        else{
+                            alert("seat"+seat.numbers+"is already booked")
                         }
                     }
 
@@ -101,6 +101,7 @@
                 })
             }
         }
+
         movieBookingSystem.addseats(5, 10)
     </script>
 </body>
