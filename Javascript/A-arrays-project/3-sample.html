@@ -53,44 +53,69 @@
 
     <script>
         var taskManager = {
-            task: {
+            tasks: {
                 pending: [],
-                inprogress: [],
+                inProgress: [],
                 completed: [],
             },
 
-            addtask() {
-                this.task.pending.push({
+            addtask(taskName) {
+                this.tasks.pending.push({
                     id: Date.now(),
                     name: taskName,
                     completed: false,
                 })
-                this. rendertask()      
+                this.rendertasks()
             },
 
-            movetask() {
+            removetask(taskId, category) {
+                this.tasks[category] = this.tasks[category].filter(task => task.id !== taskId)
+                this.rendertasks()
 
             },
 
-            removetask() {
-
+            movetask(taskId, fromCategory, toCategory) {
+                var taskIndex = this.tasks[fromCategory].findIndex(task => task.id === taskId)
+                if (taskIndex !== -1) {
+                    var task = this.tasks[fromCategory].splice(taskIndex, 1)[0]
+                    if (toCategory === "completed") task.completed = true
+                    this.tasks[toCategory].push(task)
+                    this.rendertasks()
+                }
             },
 
-            rendertask() {
-                ["pending","inprogress","completed"].forEach(category=>{
-                    var container = document.getElementById(`${category}tasks`)
-                    container.innerHTML=""
-                    this.tasks[category].forEach(task=>{
-                        
-                    })
+            rendertasks() {
+                ["pending", "inProgress", "completed"].forEach(category => {
+                    var container = document.getElementById(`${category}Tasks`);
+                    container.innerHTML = "";
+                    this.tasks[category].forEach(task => {
+                        var taskItem = document.createElement("li")
+                        taskItem.textContent = task.name
+                        var buttons = document.createElement("div");
+                        if (category !== "completed") {taskItem.textContent = task.name
+                            var movebutton = document.createElement("button")
+                            movebutton.textContent = "move"
+                            movebutton.onclick = () => this.movetask(task.id, category, category === "pending" ?
+                                "inProgress" : "completed")
+                            buttons.appendChild(movebutton)
+                        }
+                        var removeButton = document.createElement("button")
+                        removeButton.textContent = "remove"
+                        removeButton.onclick = () => this.removetask(task.id, category);
+                        buttons.appendChild(removeButton);
+
+                        taskItem.appendChild(buttons)
+                        container.appendChild(taskItem)
+
+                    });
                 })
-            },
+            }
         }
 
         document.getElementById("addTaskForm").addEventListener("submit", function (e) {
             e.preventDefault();
             taskManager.addtask(document.getElementById("taskName").value)
-            e.target.reset();
+            e.target.reset()
         })
     </script>
 </body>

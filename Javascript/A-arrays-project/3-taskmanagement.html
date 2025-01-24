@@ -78,14 +78,14 @@
                     this.renderTasks();
                 }
             },
-
+                
             removeTask(taskId, category) {
                 this.tasks[category] = this.tasks[category].filter(task => task.id !== taskId);
                 this.renderTasks();
             },
 
             renderTasks() {
-                ["pending", "inProgress", "completed"].forEach(category => {    
+                ["pending", "inProgress", "completed"].forEach(category => {
                     const container = document.getElementById(`${category}Tasks`);
                     container.innerHTML = "";
                     this.tasks[category].forEach(task => {
