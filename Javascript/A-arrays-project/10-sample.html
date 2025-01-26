@@ -35,7 +35,7 @@
         var expenseTracker = {
             expenses: {},
 
-            addexpense(category, amount) {
+            addexpense(category,  amount) {
                 if (amount <= 0) {
                     alert("Expance amount greater than zero")
                     return
@@ -49,6 +49,7 @@
                     amount: parseFloat(amount),
                     date: new Date(),
                 })
+
                 this.rendercategories();
             },
 
@@ -108,6 +109,8 @@
             expenseTracker.addexpense(category, amount)
             e.target.reset()
         })
+
+        
     </script>
 </body>
 
