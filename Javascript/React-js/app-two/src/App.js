@@ -1,10 +1,18 @@
 import './App.css';
-import Sample1 from './Components/Sample1';
+import Cartmanagement from './Components/Cartmanagement';
+import Ecommerce from './Components/Ecommerce';
+import Expancetracker from './Components/Expancetracker';
+import Moviebooking from './Components/Moviebooking';
+import Socialmedia from './Components/Socialmedia';
 
 function App() {
   return (
     <div className="App">
-     <Sample1/>
+      <Cartmanagement/>
+      <Moviebooking/>
+      <Ecommerce/>
+      <Socialmedia/>
+      <Expancetracker/>
     </div>
   );
 }
