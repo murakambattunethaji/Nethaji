@@ -1,6 +1,6 @@
 // Example: Redux Store
 import { configureStore } from '@reduxjs/toolkit';
-import {cartreducer,moviereducer,ecommercereduser,socialmediareduse,expancetrackerreduser} from './totaldata';
+import {cartreducer,moviereducer,ecommercereduser,socialmediareduse,expancetrackerreduser, digitaladdressbookreduser} from './totaldata';
 
 
 
@@ -10,7 +10,8 @@ export const store = configureStore({
         moviebooking:moviereducer,
         ecommerce:ecommercereduser,
         socialmedia:socialmediareduse,
-        expancetracker:expancetrackerreduser
+        expancetracker:expancetrackerreduser,
+        digitaladdressbook:digitaladdressbookreduser
     }
   
 });

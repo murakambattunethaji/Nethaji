@@ -30,9 +30,17 @@ const expancetracker = createSlice({
     reducers:{}
 })
 
+const digitaladdressbook = createSlice({
+    name:"expancetracker",
+    initialState:["digital 1","digital 2","digital 3",],
+    reducers:{}
+})
+
 export const cartreducer= cartmanagement.reducer
 export const moviereducer= moviebooking.reducer
 export const ecommercereduser= ecommerce.reducer
 export const socialmediareduse = socialmedia.reducer
 export const expancetrackerreduser = expancetracker.reducer
+export const digitaladdressbookreduser = digitaladdressbook.reducer
+
 

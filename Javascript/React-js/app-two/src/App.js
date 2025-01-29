@@ -1,5 +1,6 @@
 import './App.css';
 import Cartmanagement from './Components/Cartmanagement';
+import Digitaladdressbook from './Components/Digitaladdressbook';
 import Ecommerce from './Components/Ecommerce';
 import Expancetracker from './Components/Expancetracker';
 import Moviebooking from './Components/Moviebooking';
@@ -13,6 +14,7 @@ function App() {
       <Ecommerce/>
       <Socialmedia/>
       <Expancetracker/>
+      <Digitaladdressbook/>
     </div>
   );
 }
