@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold text-center mb-6">Library Management System</h1>
+
+      <!-- Add Book Section -->
+      <div class="mb-6">
+        <input id="book-title" type="text" placeholder="Book Title"
+          class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 mb-2">
+        <input id="author" type="text" placeholder="Author"
+          class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 mb-2">
+        <button id="add-book-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Add Book</button>
+      </div>
+
+      <!-- Library Inventory Section -->
+      <div id="library" class="bg-white shadow-lg rounded-lg p-4">
+        <h2 class="text-xl font-semibold mb-4">Library Inventory</h2>
+        <div id="books" class="space-y-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:3000/books";
+
+    // Fetch Books from db.json
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch(API_URL   );
+        if (!response.ok) throw new Error("Failed to fetch books");
+        const books = await response.json();
+        renderBooks(books);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    // Add Book to db.json
+    const addBook = async () => {
+      const title = document.getElementById("book-title").value.trim();
+      const author = document.getElementById("author").value.trim();
+
+      if (!title || !author) {
+        alert("Please enter both title and author!");
+        return;
+      }
+
+      const newBook = {
+        id: Date.now().toString(),
+        title,
+        author,
+        status: "Available"
+      };
+
+      try {
+        await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newBook),
+        });
+
+        fetchBooks(); // Refresh book list
+        document.getElementById("book-title").value = "";
+        document.getElementById("author").value = "";
+      } catch (error) {
+        console.error("Error adding book:", error);
+      }
+    };
+
+    // Delete Book from db.json
+    const deleteBook = async (id) => {
+      try {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        fetchBooks();
+      } catch (error) {
+        console.error("Error deleting book:", error);
+      }
+    };
+
+    // Render Books
+    const renderBooks = (books) => {
+      const booksContainer = document.getElementById("books");
+      booksContainer.innerHTML = "";
+
+      books.forEach((book) => {
+        const bookElement = document.createElement("div");
+        bookElement.className = "p-4 border rounded flex justify-between items-center";
+        bookElement.innerHTML = `
+          <div>
+            <p class="text-lg font-semibold">${book.title}</p>
+            <p class="text-gray-600">by ${book.author}</p>
+          </div>
+          <button onclick="deleteBook('${book.id}')" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+        `;
+
+        booksContainer.appendChild(bookElement);
+      });
+    };
+
+    document.getElementById("add-book-btn").addEventListener("click", addBook);
+
+    fetchBooks(); // Load books on page load
+  </script>
+</body>
+
+</html>

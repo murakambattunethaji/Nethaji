@@ -16,7 +16,8 @@
             <!-- Search Movies Section -->
             <div class="mb-6">
                 <input id="movie-search" type="text" placeholder="Search movies..."
-                    class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500" oninput="searchMovies()">
+                <div id="movie-results"></div>
             </div>
 
             <!-- Theater Layout Section -->
@@ -46,83 +47,116 @@
     </div>
 
     <script>
-        // Seat booking logic using closures
-        const createTheater = (rows, cols) => {
-            const seats = Array.from({ length: rows }, () =>
-                Array.from({ length: cols }, () => ({ booked: false }))
-            );
+        const API_BASE_URL = 'http://localhost:3000';
 
-            return {
-                bookSeat: (row, col) => {
-                    if (!seats[row][col].booked) {
-                        seats[row][col].booked = true;
-                        return true;
-                    }
-                    return false;
-                },
-                cancelSeat: (row, col) => {
-                    if (seats[row][col].booked) {
-                        seats[row][col].booked = false;
-                        return true;
-                    }
-                    return false;
-                },
-                getSeats: () => seats,
-            };
+        // Fetch Movies based on search input
+        const searchMovies = async () => {
+            const query = document.getElementById("movie-search").value;
+            if (query.length > 2) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/movies?q=${query}`);
+                    if (!response.ok) throw new Error("Failed to fetch movies");
+                    const data = await response.json();
+                    renderMovieResults(data);
+                } catch (error) {
+                    console.error("Error fetching movies:", error);
+                }
+            } else {
+                document.getElementById("movie-results").innerHTML = '';
+            }
         };
 
-        const theater = createTheater(5, 10);
+        const renderMovieResults = (movies) => {
+            const resultsContainer = document.getElementById("movie-results");
+            resultsContainer.innerHTML = '';
+            movies.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.classList.add('p-4', 'border', 'rounded', 'mb-2');
+                movieDiv.textContent = movie.title;
+                resultsContainer.appendChild(movieDiv);
+            });
+        };
+
+        // Fetch Theater Layout
+        const fetchTheaterLayout = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/theater-layout`);
+                if (!response.ok) throw new Error("Theater layout not found");
+                const data = await response.json();
+                renderSeats(data.layout);
+            } catch (error) {
+                console.error("Error fetching theater layout:", error);
+            }
+        };
 
         // Render seats dynamically
-        const renderSeats = () => {
+        const renderSeats = (layout) => {
             const seatsContainer = document.getElementById("seats");
             seatsContainer.innerHTML = "";
 
-            theater.getSeats().forEach((row, rowIndex) => {
+            layout.forEach((row, rowIndex) => {
                 row.forEach((seat, colIndex) => {
                     const seatButton = document.createElement("button");
-                    seatButton.className = `p-2 rounded ${seat.booked ? "bg-red-500" : "bg-green-500"
-                        }`;
+                    seatButton.className = `p-2 rounded ${seat.booked ? "bg-red-500" : "bg-green-500"}`;
                     seatButton.textContent = `${rowIndex + 1}-${colIndex + 1}`;
                     seatButton.title = seat.booked ? "Booked" : "Available";
-                    seatButton.addEventListener("click", () =>
-                        toggleSeat(rowIndex, colIndex)
-                    );
+                    seatButton.addEventListener("click", () => toggleSeat(rowIndex, colIndex));
                     seatsContainer.appendChild(seatButton);
                 });
             });
         };
 
-        // Toggle seat booking
-        const toggleSeat = (row, col) => {
-            const seat = theater.getSeats()[row][col];
-            if (seat.booked) {
-                theater.cancelSeat(row, col);
-            } else {
-                theater.bookSeat(row, col);
-            }
-            renderSeats();
+        // Toggle seat booking (API call to book/cancel)
+        const toggleSeat = async (row, col) => {
+            try {
+                const theaterData = await fetch(`${API_BASE_URL}/theater-layout`);
+                if (!theaterData.ok) throw new Error("Theater layout fetch failed");
+                const data = await theaterData.json();
+
+                // Toggle seat status
+                data.layout[row][col].booked = !data.layout[row][col].booked;
+
+                await fetch(`${API_BASE_URL}/theater-layout`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                fetchTheaterLayout();
+            } catch (error) {
+                console.error("Error toggling seat:", error);
+             }
         };
 
         // Confirm booking
-        document
-            .getElementById("confirm-booking")
-            .addEventListener("click", async () => {
-                alert("Booking confirmed!");
-            });
+        document.getElementById("confirm-booking").addEventListener("click", async () => {
+            alert("Booking confirmed! (Mock API - No real backend)");
+        });
 
         // Cancel all bookings
-        document.getElementById("cancel-booking").addEventListener("click", () => {
-            theater
-                .getSeats()
-                .forEach((row, rowIndex) =>
-                    row.forEach((_, colIndex) => theater.cancelSeat(rowIndex, colIndex))
-                );
-            renderSeats();
+        document.getElementById("cancel-booking").addEventListener("click", async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/theater-layout`);
+                if (!response.ok) throw new Error("Failed to fetch layout");
+                const data = await response.json();
+
+                // Reset all seats
+                data.layout.forEach(row => row.forEach(seat => seat.booked = false));
+
+                await fetch(`${API_BASE_URL}/theater-layout`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                fetchTheaterLayout();
+            } catch (error) {
+                console.error("Error canceling bookings:", error);
+            }
         });
 
         // Initialize
-        document.addEventListener("DOMContentLoaded", renderSeats);
+        document.addEventListener("DOMContentLoaded", fetchTheaterLayout);
     </script>
 </body>
 
