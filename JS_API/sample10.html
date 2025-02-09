@@ -14,7 +14,6 @@
         <div class="container mx-auto p-6">
             <h1 class="text-3xl font-bold text-center mb-6">Expense Tracker</h1>
 
-            <!-- Add Expense Section -->
             <div class="mb-6 bg-white p-4 shadow rounded-lg">
                 <input id="expense-description" type="text" placeholder="Description"
                     class="w-full p-2 border rounded-lg mb-2">
@@ -29,7 +28,6 @@
                 <button id="add-expense-btn" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Add Expense</button>
             </div>
 
-            <!-- Expense List Section -->
             <div id="expense-list" class="bg-white shadow-lg rounded-lg p-4">
                 <h2 class="text-xl font-semibold mb-4">Expenses</h2>
                 <div id="expenses" class="space-y-4"></div>
@@ -41,7 +39,6 @@
     <script>
         let expenses = [];
 
-        // Fetch expenses from API
         const fetchExpenses = async () => {
             try {
                 const response = await fetch("http://localhost:3000/expenses");
@@ -54,19 +51,16 @@
             }
         };
 
-        // Save to localStorage
         const saveToLocalStorage = () => {
             localStorage.setItem("expenses", JSON.stringify(expenses));
         };
 
-        // Load from localStorage
         const loadFromLocalStorage = () => {
             const storedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
             expenses = storedExpenses;
             renderExpenses();
         };
 
-        // Add expense
         document.getElementById("add-expense-btn").addEventListener("click", () => {
             const description = document.getElementById("expense-description").value.trim();
             const amount = parseFloat(document.getElementById("expense-amount").value);
@@ -85,7 +79,6 @@
             document.getElementById("expense-amount").value = "";
         });
 
-        // Render expenses
         const renderExpenses = () => {
             const expenseContainer = document.getElementById("expenses");
             expenseContainer.innerHTML = "";
@@ -107,20 +100,17 @@
             calculateTotal();
         };
 
-        // Calculate total expenses
         const calculateTotal = () => {
             const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
             document.getElementById("total-expenses").textContent = total.toFixed(2);
         };
 
-        // Delete expense
         const deleteExpense = (id) => {
             expenses = expenses.filter(expense => expense.id !== id);
             saveToLocalStorage();
             renderExpenses();
         };
 
-        // Initialize application
         document.addEventListener("DOMContentLoaded", () => {
             loadFromLocalStorage();
             fetchExpenses();

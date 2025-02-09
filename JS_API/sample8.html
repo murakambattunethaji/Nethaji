@@ -13,18 +13,15 @@
         <div class="container mx-auto p-6">
             <h1 class="text-3xl font-bold text-center mb-6">Movie Ticket Booking System</h1>
 
-            <!-- Search Movies Section -->
             <div class="mb-6">
                 <input id="movie-search" type="text" placeholder="Search movies..."
                     class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500" oninput="searchMovies()">
                 <div id="movie-results"></div>
             </div>
 
-            <!-- Theater Layout Section -->
             <div id="theater-layout" class="bg-white shadow-lg rounded-lg p-4">
                 <h2 class="text-xl font-semibold mb-4">Theater Layout</h2>
 
-                <!-- Legend -->
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center">
                         <div class="w-6 h-6 bg-green-500 rounded-full mr-2"></div> Available
@@ -34,7 +31,6 @@
                     </div>
                 </div>
 
-                <!-- Seats -->
                 <div id="seats" class="grid grid-cols-10 gap-2"></div>
 
                 <div class="mt-4 text-center">
@@ -49,7 +45,6 @@
     <script>
         const API_BASE_URL = 'http://localhost:3000';
 
-        // Fetch Movies based on search input
         const searchMovies = async () => {
             const query = document.getElementById("movie-search").value;
             if (query.length > 2) {
@@ -77,7 +72,6 @@
             });
         };
 
-        // Fetch Theater Layout
         const fetchTheaterLayout = async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/theater-layout`);
@@ -89,7 +83,6 @@
             }
         };
 
-        // Render seats dynamically
         const renderSeats = (layout) => {
             const seatsContainer = document.getElementById("seats");
             seatsContainer.innerHTML = "";
@@ -106,14 +99,12 @@
             });
         };
 
-        // Toggle seat booking (API call to book/cancel)
         const toggleSeat = async (row, col) => {
             try {
                 const theaterData = await fetch(`${API_BASE_URL}/theater-layout`);
                 if (!theaterData.ok) throw new Error("Theater layout fetch failed");
                 const data = await theaterData.json();
 
-                // Toggle seat status
                 data.layout[row][col].booked = !data.layout[row][col].booked;
 
                 await fetch(`${API_BASE_URL}/theater-layout`, {
@@ -128,19 +119,16 @@
              }
         };
 
-        // Confirm booking
         document.getElementById("confirm-booking").addEventListener("click", async () => {
             alert("Booking confirmed! (Mock API - No real backend)");
         });
 
-        // Cancel all bookings
         document.getElementById("cancel-booking").addEventListener("click", async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/theater-layout`);
                 if (!response.ok) throw new Error("Failed to fetch layout");
                 const data = await response.json();
 
-                // Reset all seats
                 data.layout.forEach(row => row.forEach(seat => seat.booked = false));
 
                 await fetch(`${API_BASE_URL}/theater-layout`, {
@@ -155,7 +143,6 @@
             }
         });
 
-        // Initialize
         document.addEventListener("DOMContentLoaded", fetchTheaterLayout);
     </script>
 </body>

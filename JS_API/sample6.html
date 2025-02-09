@@ -13,7 +13,6 @@
     <div class="container mx-auto p-6">
       <h1 class="text-3xl font-bold text-center mb-6">Library Management System</h1>
 
-      <!-- Add Book Section -->
       <div class="mb-6">
         <input id="book-title" type="text" placeholder="Book Title"
           class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 mb-2">
@@ -22,7 +21,6 @@
         <button id="add-book-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Add Book</button>
       </div>
 
-      <!-- Library Inventory Section -->
       <div id="library" class="bg-white shadow-lg rounded-lg p-4">
         <h2 class="text-xl font-semibold mb-4">Library Inventory</h2>
         <div id="books" class="space-y-4"></div>
@@ -33,7 +31,6 @@
   <script>
     const API_URL = "http://localhost:3000/books";
 
-    // Fetch Books from db.json
     const fetchBooks = async () => {
       try {
         const response = await fetch(API_URL   );
@@ -45,7 +42,6 @@
       }
     };
 
-    // Add Book to db.json
     const addBook = async () => {
       const title = document.getElementById("book-title").value.trim();
       const author = document.getElementById("author").value.trim();
@@ -69,7 +65,7 @@
           body: JSON.stringify(newBook),
         });
 
-        fetchBooks(); // Refresh book list
+        fetchBooks(); 
         document.getElementById("book-title").value = "";
         document.getElementById("author").value = "";
       } catch (error) {
@@ -77,7 +73,6 @@
       }
     };
 
-    // Delete Book from db.json
     const deleteBook = async (id) => {
       try {
         await fetch(`${API_URL}/${id}`, { method: "DELETE" });
@@ -87,7 +82,6 @@
       }
     };
 
-    // Render Books
     const renderBooks = (books) => {
       const booksContainer = document.getElementById("books");
       booksContainer.innerHTML = "";
@@ -109,7 +103,7 @@
 
     document.getElementById("add-book-btn").addEventListener("click", addBook);
 
-    fetchBooks(); // Load books on page load
+    fetchBooks(); 
   </script>
 </body>
 

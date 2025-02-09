@@ -13,7 +13,6 @@
         <div class="container mx-auto p-6">
             <h1 class="text-3xl font-bold text-center mb-6">Inventory Management System</h1>
 
-            <!-- Add Product Section -->
             <div class="mb-6">
                 <input id="product-name" type="text" placeholder="Product Name"
                     class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 mb-2">
@@ -22,7 +21,6 @@
                 <button id="add-product-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Add Product</button>
             </div>
 
-            <!-- Inventory Section -->
             <div id="inventory" class="bg-white shadow-lg rounded-lg p-4">
                 <h2 class="text-xl font-semibold mb-4">Product Inventory</h2>
                 <div id="products" class="space-y-4"></div>
@@ -31,10 +29,8 @@
     </div>
 
     <script>
-        // Inventory data
         let inventory = [];
 
-        // Fetch inventory data from the server (if available)
         const fetchInventory = async () => {
             try {
                 const response = await fetch("http://localhost:3000/inventory");
@@ -57,7 +53,6 @@
             }
         };
 
-        // Add product to inventory
         document.getElementById("add-product-btn").addEventListener("click", () => {
             const name = document.getElementById("product-name").value.trim();
             const quantity = parseInt(document.getElementById("product-quantity").value, 10);
@@ -72,23 +67,19 @@
             saveToLocalStorage();
             renderInventory();
 
-            // Clear input fields
             document.getElementById("product-name").value = "";
             document.getElementById("product-quantity").value = "";
         });
 
-        // Save inventory to localStorage
         const saveToLocalStorage = () => {
             localStorage.setItem("inventory", JSON.stringify(inventory));
         };
 
-        // Load inventory from localStorage
         const loadFromLocalStorage = () => {
             const storedInventory = localStorage.getItem("inventory");
             if (storedInventory) inventory = JSON.parse(storedInventory);
         };
 
-        // Render inventory dynamically
         const renderInventory = () => {
             const productsContainer = document.getElementById("products");
             productsContainer.innerHTML = "";
@@ -121,7 +112,6 @@
             });
         };
 
-        // Update product quantity
         const updateProduct = (id, action) => {
             const product = inventory.find((p) => p.id === id);
             if (!product) return;
@@ -141,14 +131,12 @@
             renderInventory();
         };
 
-        // Remove product
         const removeProduct = (id) => {
             inventory = inventory.filter((product) => product.id !== id);
             saveToLocalStorage();
             renderInventory();
         };
 
-        // Initialize application
         document.addEventListener("DOMContentLoaded", async () => {
             await fetchInventory();
             renderInventory();
