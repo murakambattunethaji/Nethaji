@@ -92,5 +92,29 @@
       "name": "Display",
       "quantity": 15
     }
+  ],
+  "postComments": [
+    {
+      "content": "good",
+      "id": "9a84",
+      "likes": 1
+    },
+    {
+      "id": "7900",
+      "content": "sad",
+      "likes": 40
+    }
+  ],
+  "cartdata": [
+    {
+      "id": 1739091819569,
+      "name": "rice",
+      "price": 12,
+      "quantity": 2
+    }
+    
+  ],
+  "addressBook":[
+    
   ]
 }

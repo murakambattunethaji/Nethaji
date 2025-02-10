@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .actions button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Social Media Posts</h2>
+
+        <form id="addPostForm">
+            <textarea id="postContent" rows="3" style="width: 100%;" placeholder="What's on your mind?"
+                required></textarea>
+            <button type="submit">Add Post</button>
+        </form>
+
+        <div id="postsContainer"></div>
+    </div>
+
+    <script>
+        const apiUrl = "http://localhost:3000/postComments";
+
+        async function fetchPosts() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error("Failed to fetch posts");
+                const posts = await response.json();
+                renderPosts(posts);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        }
+
+        async function addPost(content) {
+            try {
+                await fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ content, likes: 0 }),
+                });
+                fetchPosts();
+            } catch (error) {
+                console.error("Error adding post:", error);
+            }
+        }
+
+        async function updatePost(postId, updatedData) {
+            try {
+                console.log("Updating post with data:", updatedData);
+                await fetch(`${apiUrl}/${postId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedData),
+                });
+                fetchPosts();
+            } catch (error) {
+                console.error("Error updating post:", error);
+            }
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById("postsContainer");
+            container.innerHTML = "";
+
+            posts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.classList.add("post");
+
+                postElement.innerHTML = `
+          <p>${post.content}</p>
+          <p>${post.likes} Likes</p>
+          <div class="actions">
+            <button onclick="likePost('${post.id}')">Like</button>
+            <button onclick="editPost('${post.id}', '${post.content.replace(/'/g, "\\'")}')">Edit</button>
+          </div>
+        `;
+
+                container.appendChild(postElement);
+            });
+        }
+
+        function editPost(postId, oldContent) {
+            const newContent = prompt("Edit your post:", oldContent);
+            if (newContent !== null && newContent.trim() !== "") {
+                updatePost(postId, { content: newContent });
+            }
+        }
+
+        async function likePost(postId) {
+            try {
+                const response = await fetch(`${apiUrl}/${postId}`);
+                if (!response.ok) throw new Error("Failed to fetch post");
+
+                const post = await response.json();
+                const updatedPost = { ...post, likes: post.likes + 1 };
+
+                console.log("Post updated with new likes:", updatedPost);
+                updatePost(postId, updatedPost);
+            } catch (error) {
+                console.error("Error liking post:", error);
+            }
+        }
+
+        document.getElementById("addPostForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const content = document.getElementById("postContent").value;
+            addPost(content);
+            e.target.reset();
+        });
+
+        fetchPosts();
+    </script>
+</body>
+
+</html>
