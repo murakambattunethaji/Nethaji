@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import { Sample } from './Sample';
+import DigitalBook from './Sample';
 
 function App() {
   return (
     <div className="App">
-   <Sample/>
+      <DigitalBook/>
     </div>
   );
 }

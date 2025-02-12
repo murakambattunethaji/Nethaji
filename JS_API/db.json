@@ -107,14 +107,52 @@
   ],
   "cartdata": [
     {
-      "id": 1739091819569,
+      "id": "1739091819569",
       "name": "rice",
       "price": 12,
       "quantity": 2
     }
-    
   ],
-  "addressBook":[
-    
+  "addressBook": [
+    {
+      "name": "John Doe 1",
+      "email": "john.doe@example.com",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com"
+    },
+    {
+      "id": "3",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com"
+    },
+    {
+      "id": "4",
+      "name": "Bob Brown",
+      "email": "bob.brown@example.com"
+    },
+    {
+      "id": "5",
+      "name": "Charlie Davis",
+      "email": "charlie.davis@example.com"
+    },
+    {
+      "name": "BN",
+      "email": "mgvishalctr@gmail.com",
+      "id": "da24"
+    },
+    {
+      "id": "6022",
+      "name": "Harry Den",
+      "email": "harry@den.com"
+    },
+    {
+      "id": "2bb4",
+      "name": "Nethaji",
+      "email": "mnethaji838@gmail.com"
+    }
   ]
 }
