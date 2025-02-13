@@ -4,7 +4,7 @@ import DigitalBook from './Sample';
 function App() {
   return (
     <div className="App">
-      <DigitalBook/>
+      <DigitalBook />
     </div>
   );
 }

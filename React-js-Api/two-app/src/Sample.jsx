@@ -9,7 +9,7 @@ const DigitalBook = () => {
 
   useEffect(() => {
     fetchContacts();
-  }, []);
+  }, []);      
 
   const fetchContacts = async () => {
     try {
