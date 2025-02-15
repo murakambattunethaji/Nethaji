@@ -115,7 +115,7 @@ const DigitalBook = () => {
         </tbody>
       </table>
     </div>
-  );
+  );                
 };
 
 export default DigitalBook;
