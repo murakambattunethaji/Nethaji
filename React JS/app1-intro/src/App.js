@@ -1,11 +1,10 @@
-import Sample from "./Sample"
 
 
 function sample(){
     return <div>
-        <Sample/>
-      
-    </div>
+        
+      <S1/>
+    </div>     
 }
 
 export  default sample
